@@ -1,0 +1,13 @@
+Stupid Mode will make your game difficult in the most stupid way possible.
+
+As of current, Stupid Mode adds various changes, both in boss fights and outside of them. Rather than listing these changes, I'll just list the affected boss fights.
+
+- King Slime
+- Eye of Cthulhu
+- Eater of Worlds
+- Brain of Cthulhu
+- Skeletron
+
+Every boss already has their changes planned out, and I am rapidly pushing updates for the mod.
+
+It should be noted that this mod is made up of whatever garbage ideas I get without much further thought, so the mod may not be balanced the best, however I'm trying to keep it possible at least. Bosses may vary in difficulty more than expected, perhaps the mod is impossibly hard. I make this mod for the fun of making it, not the fun of playing it. If you attempt this, I salute you for sacrificing your time and sanity.
