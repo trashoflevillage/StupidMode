@@ -68,6 +68,12 @@ namespace StupidMode.Common.Global
             {
                 Main.npc[NPC.NewNPC(Entity.GetSource_NaturalSpawn(), i * 16, j * 16, NPCID.Ghost)].value = 0;
             }
+
+            if (type == TileID.Meteorite && !fail && !effectOnly && !noItem)
+            {
+                noItem = true;
+                Main.npc[NPC.NewNPC(NPC.GetSource_NaturalSpawn(), i * 16, j * 16, NPCID.MeteorHead)].GetGlobalNPC<StupidNPC>().dropMeteorite = true;
+            }
         }
     }
 }

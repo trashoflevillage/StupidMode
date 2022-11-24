@@ -6,6 +6,8 @@ As of current, Stupid Mode adds various changes, both in boss fights and outside
 - Eye of Cthulhu
 - Eater of Worlds
 - Brain of Cthulhu
+- Deerclops
+- Queen Bee
 - Skeletron
 
 Every boss already has their changes planned out, and I am rapidly pushing updates for the mod.
