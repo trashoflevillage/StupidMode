@@ -42,6 +42,11 @@ namespace StupidMode.Common.Global
                 npc.noTileCollide = true;
             }
 
+            if (npc.type == NPCID.MoonLordCore)
+            {
+                npc.damage = 80;
+            }
+
             // Initialize boss ability cooldowns
             {
                 NewCooldown(npc, NPCID.EyeofCthulhu, "boulderThrowActivate", 420);
@@ -221,16 +226,16 @@ namespace StupidMode.Common.Global
                 if (cooldowns["waterbolt"].TickCooldown())
                 {
                     int timeLeft = 240;
-                    int index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(5, 5), ProjectileID.WaterBolt, npc.damage, 3);
+                    int index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(5, 5), ProjectileID.WaterBolt, npc.damage, 3, npc.whoAmI);
                     Main.projectile[index].timeLeft = timeLeft;
 
-                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(5, -5), ProjectileID.WaterBolt, npc.damage, 3);
+                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(5, -5), ProjectileID.WaterBolt, npc.damage, 3, npc.whoAmI);
                     Main.projectile[index].timeLeft = timeLeft;
 
-                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(-5, 5), ProjectileID.WaterBolt, npc.damage, 3);
+                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(-5, 5), ProjectileID.WaterBolt, npc.damage, 3, npc.whoAmI);
                     Main.projectile[index].timeLeft = timeLeft;
 
-                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(-5, -5), ProjectileID.WaterBolt, npc.damage, 3);
+                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(-5, -5), ProjectileID.WaterBolt, npc.damage, 3, npc.whoAmI);
                     Main.projectile[index].timeLeft = timeLeft;
                 }
             }
