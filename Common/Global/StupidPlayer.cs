@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.GameContent.Events;
 
 namespace StupidMode.Common.Global
 {
@@ -39,6 +40,29 @@ namespace StupidMode.Common.Global
             if (NPC.GetFirstNPCNameOrNull(NPCID.Guide) == null)
             {
                 Player.AddBuff(ModContent.BuffType<Content.Buffs.Misguided>(), 5);
+            }
+        }
+
+        public override void PreUpdate()
+        {
+            PassiveEffects();
+        }
+
+        public void PassiveEffects()
+        {
+            if (Main.bloodMoon)
+                Player.AddBuff(BuffID.Bleeding, 60, false);
+
+            if (!Player.behindBackWall)
+            {
+                if (Player.ZoneDesert)
+                    Player.AddBuff(BuffID.OnFire, 60, false);
+            }
+
+            if (Player.ZoneJungle)
+            {
+                if (Player.breath < Player.breathMax)
+                    Player.AddBuff(BuffID.Poisoned, 60, false);
             }
         }
     }

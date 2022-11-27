@@ -45,13 +45,13 @@ namespace StupidMode.Common.Global
             // Initialize boss ability cooldowns
             {
                 NewCooldown(npc, NPCID.EyeofCthulhu, "boulderThrowActivate", 420);
-                NewCooldown(npc, NPCID.EyeofCthulhu, "boulderThrow", 180, -1);
+                NewCooldown(npc, NPCID.EyeofCthulhu, "boulderThrow", 180, true, -1);
 
                 NewCooldown(npc, NPCID.KingSlime, "slimeSpike", 40);
 
                 NewCooldown(npc, NPCID.SkeletronHead, "waterbolt", 80);
 
-                NewCooldown(npc, NPCID.QueenBee, "beenadeVolleyActivate", 420);
+                NewCooldown(npc, NPCID.QueenBee, "beenadeVolleyActivate", 420, true, -100);
                 NewCooldown(npc, NPCID.QueenBee, "beenadeVolley", 220);
                 NewCooldown(npc, NPCID.QueenBee, "beehiveDrop", 80);
             }
@@ -87,7 +87,30 @@ namespace StupidMode.Common.Global
             {
                 for (int i = 0; i < Main.rand.Next(4, 8); i++)
                 {
-                    int index = NewHostileProjectile(npc.GetSource_FromAI(), npc.Center, new Vector2(Main.rand.Next(-16, 16), Main.rand.Next(-16, 16)), ProjectileID.CursedFlameFriendly, npc.damage, 3f);
+                    NewHostileProjectile(npc.GetSource_FromAI(), npc.Center, new Vector2(Main.rand.Next(-16, 16), Main.rand.Next(-16, 16)), ProjectileID.CursedFlameFriendly, npc.damage, 3f);
+                }
+            }
+
+            int[] goblins = new int[]
+            {
+                NPCID.GoblinArcher,
+                NPCID.GoblinPeon,
+                NPCID.GoblinScout,
+                NPCID.GoblinShark,
+                NPCID.GoblinSorcerer,
+                NPCID.GoblinSummoner,
+                NPCID.GoblinThief,
+                NPCID.GoblinTinkerer,
+                NPCID.GoblinWarrior,
+                NPCID.BoundGoblin
+            };
+
+            if (goblins.Contains(npc.type))
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    int index = NewHostileProjectile(npc.GetSource_Death(), npc.Center, new Vector2(Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-16, -1)), ProjectileID.SpikyBall, npc.damage, 1f);
+                    Main.projectile[index].timeLeft = 300;
                 }
             }
         }
@@ -142,7 +165,7 @@ namespace StupidMode.Common.Global
         {
             StupidNPC modNPC = npc.GetGlobalNPC<StupidNPC>();
 
-            if (npc.type == NPCID.KingSlime)
+            if (cooldowns.ContainsKey("slimeSpike"))
             {
                 if (npc.life <= npc.lifeMax / 2)
                 {
@@ -159,7 +182,7 @@ namespace StupidMode.Common.Global
                 }
             }
 
-            if (npc.type == NPCID.EyeofCthulhu)
+            if (cooldowns.ContainsKey("boulderThrow"))
             {
                 if ((!Main.expertMode && !Main.masterMode && npc.life <= npc.lifeMax * 0.5) || ((Main.expertMode || Main.masterMode) && npc.life <= npc.lifeMax * 0.65))
                 {
@@ -193,7 +216,7 @@ namespace StupidMode.Common.Global
                 }
             }
 
-            if (npc.type == NPCID.SkeletronHead)
+            if (cooldowns.ContainsKey("waterbolt"))
             {
                 if (cooldowns["waterbolt"].TickCooldown())
                 {
@@ -232,7 +255,7 @@ namespace StupidMode.Common.Global
                 }
             }
 
-            if (npc.type == NPCID.QueenBee)
+            if (cooldowns.ContainsKey("beenadeVolley"))
             {
                 if (cooldowns["beenadeVolley"].val == -1 && cooldowns["beenadeVolleyActivate"].TickCooldown())
                 {
@@ -287,15 +310,20 @@ namespace StupidMode.Common.Global
                 NPCID.EaterofWorldsBody,
                 NPCID.EaterofWorldsTail,
                 NPCID.Creeper,
-                NPCID.ServantofCthulhu
+                NPCID.ServantofCthulhu,
+                NPCID.MoonLordHand,
+                NPCID.MoonLordHead,
+                NPCID.MoonLordCore,
+                NPCID.MoonLordFreeEye,
+                NPCID.MoonLordLeechBlob
             };
             if (!npc.friendly && !modNPC.child && !npc.boss && !exceptions.Contains(npc.type)) return true;
             return false;
         }
 
-        public void NewCooldown(NPC npc, int npcType, string key, int counterMax, int? defaultVal = null)
+        public void NewCooldown(NPC npc, int npcType, string key, int counterMax, bool moonLordCopiesAbility = true, int ? defaultVal = null)
         {
-            if (npc.type == npcType)
+            if (npc.type == npcType || (npc.type == NPCID.MoonLordCore && moonLordCopiesAbility))
             {
                 cooldowns[key] = new Cooldown(counterMax, defaultVal);
             }
