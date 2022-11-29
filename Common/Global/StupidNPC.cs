@@ -37,7 +37,16 @@ namespace StupidMode.Common.Global
                 npc.lavaImmune = true;
             }
 
-            if (npc.type == NPCID.Bee || npc.type == NPCID.BeeSmall)
+            int[] noTileCollide = new int[]
+            {
+                NPCID.Bee,
+                NPCID.BeeSmall,
+                NPCID.Hellbat,
+                NPCID.Demon,
+                NPCID.Lavabat
+            };
+
+            if (noTileCollide.Contains(npc.type))
             {
                 npc.noTileCollide = true;
             }
@@ -56,9 +65,14 @@ namespace StupidMode.Common.Global
 
                 NewCooldown(npc, NPCID.SkeletronHead, "waterbolt", 80);
 
-                NewCooldown(npc, NPCID.QueenBee, "beenadeVolleyActivate", 420, true, -100);
-                NewCooldown(npc, NPCID.QueenBee, "beenadeVolley", 220);
+                NewCooldown(npc, NPCID.QueenBee, "beenadeVolleyActivate", 420);
+                NewCooldown(npc, NPCID.QueenBee, "beenadeVolley", 220, true, -1);
                 NewCooldown(npc, NPCID.QueenBee, "beehiveDrop", 80);
+
+                NewCooldown(npc, NPCID.WallofFlesh, "regurgitateActivate", 2000);
+                NewCooldown(npc, NPCID.WallofFlesh, "regurgitate", 180, true, -1);
+
+                NewCooldown(npc, NPCID.WallofFleshEye, "boulderThrowWOF", 120);
             }
         }
 
@@ -300,6 +314,50 @@ namespace StupidMode.Common.Global
                     NewHostileProjectile(npc.GetSource_FromAI(), spawnPos, new Vector2(0, 2), ProjectileID.BeeHive, npc.damage, 1f);
                 }
             }
+            
+            if (cooldowns.ContainsKey("regurgitate"))
+            {
+                if (cooldowns["regurgitate"].val == -1 && cooldowns["regurgitateActivate"].TickCooldown())
+                {
+                    cooldowns["regurgitate"].val = 0;
+                    SoundEngine.PlaySound(SoundID.NPCHit57, npc.position);
+                }
+
+                if (cooldowns["regurgitate"].val >= 0)
+                {
+                    if (cooldowns["regurgitate"].TickCooldown())
+                    {
+                        Vector2 spawnPos = npc.Center;
+                        spawnPos.Y -= npc.height / 2;
+                        int[] npcTypes = new int[]
+                        {
+                            NPCID.FireImp,
+                            NPCID.Demon,
+                            NPCID.LavaSlime,
+                            NPCID.Hellbat
+                        };
+                        for (float i = 0; i < 5; i++)
+                        {
+                            int index = NewChild(npc.GetSource_FromAI(), (int)npc.Center.X, (int)npc.Center.Y, npcTypes[Main.rand.Next(npcTypes.Length)], 0, 0, 0, 0, 0, npc.target);
+                            Vector2 vel = npc.velocity * Main.rand.Next(5, 11);
+                            if (Main.rand.NextBool()) npc.velocity.Y *= -1;
+                            Main.npc[index].velocity = vel;
+                        }
+                        SoundEngine.PlaySound(SoundID.NPCDeath13, npc.position);
+                        cooldowns["regurgitate"].val = -1;
+                    }
+                }
+            }
+
+            if (cooldowns.ContainsKey("boulderThrowWOF"))
+            {
+                if (cooldowns["boulderThrowWOF"].TickCooldown())
+                {
+                    NewHostileProjectile(npc.GetSource_FromAI(), npc.Center, 
+                        npc.DirectionTo(Main.player[npc.target].position) * 20,
+                        ProjectileID.Boulder, npc.damage, 5f);
+                }
+            }
         }
         
         /// <summary>
@@ -320,7 +378,12 @@ namespace StupidMode.Common.Global
                 NPCID.MoonLordHead,
                 NPCID.MoonLordCore,
                 NPCID.MoonLordFreeEye,
-                NPCID.MoonLordLeechBlob
+                NPCID.MoonLordLeechBlob,
+                NPCID.TheHungry,
+                NPCID.TheHungryII,
+                NPCID.LeechBody,
+                NPCID.LeechHead,
+                NPCID.LeechTail
             };
             if (!npc.friendly && !modNPC.child && !npc.boss && !exceptions.Contains(npc.type)) return true;
             return false;
