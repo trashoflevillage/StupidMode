@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "JBcAOQOSyIQrnpHalJuqxQ5Fq5wNtF31P0AEErqWlBCYj9ANtI5shpQ56YdQT4OX86YBgQxaSX0/cJQGB/gFWg==",
+  "dgSpecHash": "9tzAdq6TWYsOopI8P4IivSJegTK4oOnk8elBvaPuTEBfQWdZTpj7rVGm58hnUJvsO5aJLz0S3ODc+PL8/k1nww==",
   "success": true,
-  "projectFilePath": "C:\\Users\\fnafl\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\StupidMode.csproj",
+  "projectFilePath": "C:\\Users\\uhhno\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\StupidMode.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\fnafl\\.nuget\\packages\\tmodloader.codeassist\\0.1.5\\tmodloader.codeassist.0.1.5.nupkg.sha512"
+    "C:\\Users\\uhhno\\.nuget\\packages\\tmodloader.codeassist\\0.1.5\\tmodloader.codeassist.0.1.5.nupkg.sha512"
   ],
   "logs": []
 }

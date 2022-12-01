@@ -9,6 +9,9 @@ As of current, Stupid Mode adds various changes, both in boss fights and outside
 - Deerclops
 - Queen Bee
 - Skeletron
+- Wall of Flesh
+
+~ Moon Lord (I added something to the fight, although the mod does not cover all content up to this point.)
 
 Every boss already has their changes planned out, and I am rapidly pushing updates for the mod.
 

@@ -56,6 +56,11 @@ namespace StupidMode.Common.Global
                 npc.damage = 80;
             }
 
+            if (npc.type == NPCID.WallofFleshEye)
+            {
+                npc.dontTakeDamage = true;
+            }
+
             // Initialize boss ability cooldowns
             {
                 NewCooldown(npc, NPCID.EyeofCthulhu, "boulderThrowActivate", 420);
@@ -178,6 +183,23 @@ namespace StupidMode.Common.Global
 
         public void OnHitByAnything(NPC npc, int damage, float knockback, bool crit)
         {
+            if (npc.type == NPCID.WallofFlesh || npc.type == NPCID.WallofFleshEye)
+            {
+                int vulnerableType;
+                if (npc.type == NPCID.WallofFlesh)
+                {
+                    vulnerableType = NPCID.WallofFleshEye;
+                } else
+                {
+                    vulnerableType = NPCID.WallofFlesh;
+                }
+
+                foreach (NPC i in Main.npc)
+                {
+                    if (i.type == npc.type) i.dontTakeDamage = true;
+                    else if (i.type == vulnerableType) i.dontTakeDamage = false;
+                }
+            }
         }
 
         public override void AI(NPC npc)
@@ -240,16 +262,16 @@ namespace StupidMode.Common.Global
                 if (cooldowns["waterbolt"].TickCooldown())
                 {
                     int timeLeft = 240;
-                    int index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(5, 5), ProjectileID.WaterBolt, npc.damage, 3, npc.whoAmI);
+                    int index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(5, 5), ProjectileID.WaterBolt, npc.damage, 3);
                     Main.projectile[index].timeLeft = timeLeft;
 
-                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(5, -5), ProjectileID.WaterBolt, npc.damage, 3, npc.whoAmI);
+                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(5, -5), ProjectileID.WaterBolt, npc.damage, 3);
                     Main.projectile[index].timeLeft = timeLeft;
 
-                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(-5, 5), ProjectileID.WaterBolt, npc.damage, 3, npc.whoAmI);
+                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(-5, 5), ProjectileID.WaterBolt, npc.damage, 3);
                     Main.projectile[index].timeLeft = timeLeft;
 
-                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(-5, -5), ProjectileID.WaterBolt, npc.damage, 3, npc.whoAmI);
+                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(-5, -5), ProjectileID.WaterBolt, npc.damage, 3);
                     Main.projectile[index].timeLeft = timeLeft;
                 }
             }
@@ -325,6 +347,12 @@ namespace StupidMode.Common.Global
 
                 if (cooldowns["regurgitate"].val >= 0)
                 {
+                    if (npc.life < npc.lifeMax / 4 && cooldowns["regurgitate"].val < cooldowns["regurgitate"].maxVal / 4)
+                        cooldowns["regurgitate"].val = cooldowns["regurgitate"].maxVal / 4;
+                    else if (npc.life < npc.lifeMax / 2 && cooldowns["regurgitate"].val < cooldowns["regurgitate"].maxVal / 2)
+                        cooldowns["regurgitate"].val = cooldowns["regurgitate"].maxVal / 2;
+
+
                     if (cooldowns["regurgitate"].TickCooldown())
                     {
                         Vector2 spawnPos = npc.Center;
@@ -336,12 +364,25 @@ namespace StupidMode.Common.Global
                             NPCID.LavaSlime,
                             NPCID.Hellbat
                         };
+                        if (npc.life < npc.lifeMax / 3)
+                        {
+                            npcTypes = new int[]
+                            {
+                                NPCID.RedDevil,
+                                NPCID.FireImp,
+                                NPCID.Lavabat,
+                                NPCID.IchorSticker,
+                                NPCID.Corruptor
+                            };
+                        }
                         for (float i = 0; i < 5; i++)
                         {
                             int index = NewChild(npc.GetSource_FromAI(), (int)npc.Center.X, (int)npc.Center.Y, npcTypes[Main.rand.Next(npcTypes.Length)], 0, 0, 0, 0, 0, npc.target);
                             Vector2 vel = npc.velocity * Main.rand.Next(5, 11);
+                            vel.Y = Main.rand.NextFloat(-3f, 3f);
                             if (Main.rand.NextBool()) npc.velocity.Y *= -1;
                             Main.npc[index].velocity = vel;
+                            NewHostileProjectile(npc.GetSource_FromAI(), npc.Center, vel, ProjectileID.BallofFire, npc.damage, 1f);
                         }
                         SoundEngine.PlaySound(SoundID.NPCDeath13, npc.position);
                         cooldowns["regurgitate"].val = -1;
