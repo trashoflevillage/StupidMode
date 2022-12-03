@@ -111,7 +111,7 @@ namespace StupidMode.Common.Global
             {
                 for (int i = 0; i < Main.rand.Next(4, 8); i++)
                 {
-                    NewHostileProjectile(npc.GetSource_FromAI(), npc.Center, new Vector2(Main.rand.Next(-16, 16), Main.rand.Next(-16, 16)), ProjectileID.CursedFlameFriendly, npc.damage, 3f);
+                    NewHostileProjectile(npc.GetSource_FromAI(), npc.Center, new Vector2(Main.rand.Next(-16, 16), Main.rand.Next(-16, 16)), ProjectileID.CursedFlameFriendly, 10, 3f);
                 }
             }
 
@@ -133,8 +133,8 @@ namespace StupidMode.Common.Global
             {
                 for (int i = 0; i < 6; i++)
                 {
-                    int index = NewHostileProjectile(npc.GetSource_Death(), npc.Center, new Vector2(Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-16, -1)), ProjectileID.SpikyBall, npc.damage, 1f);
-                    Main.projectile[index].timeLeft = 300;
+                    int? index = NewHostileProjectile(npc.GetSource_Death(), npc.Center, new Vector2(Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-16, -1)), ProjectileID.SpikyBall, 8, 1f);
+                    Main.projectile[index.Value].timeLeft = 300;
                 }
             }
         }
@@ -217,7 +217,7 @@ namespace StupidMode.Common.Global
                             float velX = Main.rand.NextFloat(1, 16);
                             float velY = Main.rand.NextFloat(1, 16) * -1;
                             if (Main.rand.NextBool()) velX *= -1;
-                            NewHostileProjectile(npc.GetSource_FromAI(), npc.Center, new Vector2(velX, velY), ProjectileID.SpikedSlimeSpike, npc.damage, 3f);
+                            NewHostileProjectile(npc.GetSource_FromAI(), npc.Center, new Vector2(velX, velY), ProjectileID.SpikedSlimeSpike, 15, 3f);
                         }
                     }
                 }
@@ -244,11 +244,11 @@ namespace StupidMode.Common.Global
 
                         if (cooldowns["boulderThrow"].TickCooldown())
                         {
-                            int index;
+                            int? index;
                             for (int i = 0; i < Main.rand.Next(4, 8); i++)
                             {
                                 index = NewHostileProjectile(npc.GetSource_FromAI(), npc.Center, new Vector2(Main.rand.Next(-16, 16), Main.rand.Next(-16, 0)), ProjectileID.Boulder, npc.damage * 8, 3f);
-                                Main.projectile[index].tileCollide = false;
+                                Main.projectile[index.Value].tileCollide = false;
                             }
                             SoundEngine.PlaySound(SoundID.Item80, npc.Center);
                             cooldowns["boulderThrow"].val = -1;
@@ -262,17 +262,18 @@ namespace StupidMode.Common.Global
                 if (cooldowns["waterbolt"].TickCooldown())
                 {
                     int timeLeft = 240;
-                    int index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(5, 5), ProjectileID.WaterBolt, npc.damage, 3);
-                    Main.projectile[index].timeLeft = timeLeft;
+                    int dmg = 20;
+                    int? index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(5, 5), ProjectileID.WaterBolt, dmg, 3);
+                    Main.projectile[index.Value].timeLeft = timeLeft;
 
-                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(5, -5), ProjectileID.WaterBolt, npc.damage, 3);
-                    Main.projectile[index].timeLeft = timeLeft;
+                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(5, -5), ProjectileID.WaterBolt, dmg, 3);
+                    Main.projectile[index.Value].timeLeft = timeLeft;
 
-                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(-5, 5), ProjectileID.WaterBolt, npc.damage, 3);
-                    Main.projectile[index].timeLeft = timeLeft;
+                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(-5, 5), ProjectileID.WaterBolt, dmg, 3);
+                    Main.projectile[index.Value].timeLeft = timeLeft;
 
-                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(-5, -5), ProjectileID.WaterBolt, npc.damage, 3);
-                    Main.projectile[index].timeLeft = timeLeft;
+                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(-5, -5), ProjectileID.WaterBolt, dmg, 3);
+                    Main.projectile[index.Value].timeLeft = timeLeft;
                 }
             }
 
@@ -322,7 +323,7 @@ namespace StupidMode.Common.Global
                         for (float i = -2; i < 3; i++)
                         {
                             vel.X = i;
-                            NewHostileProjectile(npc.GetSource_FromAI(), spawnPos, vel, ModContent.ProjectileType<Content.Projectiles.MeanBeenade>(), npc.damage, 0);
+                            NewHostileProjectile(npc.GetSource_FromAI(), spawnPos, vel, ModContent.ProjectileType<Content.Projectiles.MeanBeenade>(), 60, 0);
                         }
                         SoundEngine.PlaySound(SoundID.Item64, npc.Center);
                         cooldowns["beenadeVolley"].val = -1;
@@ -333,7 +334,7 @@ namespace StupidMode.Common.Global
                 {
                     Vector2 spawnPos = npc.Center;
                     spawnPos.Y -= npc.height / 2;
-                    NewHostileProjectile(npc.GetSource_FromAI(), spawnPos, new Vector2(0, 2), ProjectileID.BeeHive, npc.damage, 1f);
+                    NewHostileProjectile(npc.GetSource_FromAI(), spawnPos, new Vector2(0, 2), ProjectileID.BeeHive, 50, 1f);
                 }
             }
             
@@ -382,7 +383,7 @@ namespace StupidMode.Common.Global
                             vel.Y = Main.rand.NextFloat(-3f, 3f);
                             if (Main.rand.NextBool()) npc.velocity.Y *= -1;
                             Main.npc[index].velocity = vel;
-                            NewHostileProjectile(npc.GetSource_FromAI(), npc.Center, vel, ProjectileID.BallofFire, npc.damage, 1f);
+                            NewHostileProjectile(npc.GetSource_FromAI(), npc.Center, vel, ProjectileID.BallofFire, 45, 1f);
                         }
                         SoundEngine.PlaySound(SoundID.NPCDeath13, npc.position);
                         cooldowns["regurgitate"].val = -1;
@@ -396,7 +397,7 @@ namespace StupidMode.Common.Global
                 {
                     NewHostileProjectile(npc.GetSource_FromAI(), npc.Center, 
                         npc.DirectionTo(Main.player[npc.target].position) * 20,
-                        ProjectileID.Boulder, npc.damage, 5f);
+                        ProjectileID.Boulder, 200, 5f);
                 }
             }
         }
@@ -473,12 +474,31 @@ namespace StupidMode.Common.Global
             }
         }
 
-        public int NewHostileProjectile(IEntitySource spawnSource, Vector2 position, Vector2 velocity, int Type, int Damage, float KnockBack, int Owner = 255, float ai0 = 0, float ai1 = 0)
+        /// <summary>
+        /// Spawns a new projectile that is marked as hostile and not friendly.<br></br>
+        /// Does the client checks necessary.
+        /// </summary>
+        /// <param name="spawnSource"></param>
+        /// <param name="position"></param>
+        /// <param name="velocity"></param>
+        /// <param name="Type"></param>
+        /// <param name="Damage"></param>
+        /// <param name="KnockBack"></param>
+        /// <param name="Owner"></param>
+        /// <param name="ai0"></param>
+        /// <param name="ai1"></param>
+        /// <returns></returns>
+        public int? NewHostileProjectile(IEntitySource spawnSource, Vector2 position, Vector2 velocity, int Type, int Damage, float KnockBack, int Owner = 255, float ai0 = 0, float ai1 = 0)
         {
-            int whoAmI = Projectile.NewProjectile(spawnSource, position, velocity, Type, Damage, KnockBack, Owner, ai0, ai1);
-            Main.projectile[whoAmI].friendly = false;
-            Main.projectile[whoAmI].hostile = true;
-            return whoAmI;
+            int? output = null;
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                int whoAmI = Projectile.NewProjectile(spawnSource, position, velocity, Type, Damage, KnockBack, Owner, ai0, ai1);
+                Main.projectile[whoAmI].friendly = false;
+                Main.projectile[whoAmI].hostile = true;
+                output = whoAmI;
+            }
+            return output;
         }
 
         public static int NewChild(IEntitySource source, int X, int Y, int Type, int Start = 0, float ai0 = 0, float ai1 = 0, float ai2 = 0, float ai3 = 0, int Target = 255)
@@ -495,6 +515,34 @@ namespace StupidMode.Common.Global
             newNPC.value = 0;
             newNPC.GivenName = "Baby " + newNPC.GivenOrTypeName;
             return index;
+        }
+
+        private static int GetBossValue()
+        {
+            int val = 0;
+            if (NPC.downedSlimeKing) val = 1;
+            if (NPC.downedBoss1) val = 2;
+            if (NPC.downedBoss2) val = 3;
+            if (NPC.downedDeerclops) val = 4;
+            if (NPC.downedQueenBee) val = 5;
+            if (NPC.downedBoss3) val = 6;
+            if (Main.hardMode) val = 7;
+            if (NPC.downedMechBossAny) val = 8;
+            if (NPC.downedFishron) val = 9;
+            if (NPC.downedPlantBoss) val = 10;
+            if (NPC.downedEmpressOfLight) val = 11;
+            if (NPC.downedGolemBoss) val = 12;
+            if (NPC.downedAncientCultist) val = 13;
+            if (NPC.downedMoonlord) val = 14;
+            return val;
+        }
+
+        public override void SetupShop(int type, Chest shop, ref int nextSlot)
+        {
+            foreach (Item i in shop.item)
+            {
+                i.value = (int)(i.value * (1 + (GetBossValue() * 0.1f)));
+            }
         }
     }
 }

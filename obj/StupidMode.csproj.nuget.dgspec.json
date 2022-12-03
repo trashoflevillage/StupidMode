@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\uhhno\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\StupidMode.csproj": {}
+    "C:\\Users\\fnafl\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\StupidMode.csproj": {}
   },
   "projects": {
-    "C:\\Users\\uhhno\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\StupidMode.csproj": {
+    "C:\\Users\\fnafl\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\StupidMode.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\uhhno\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\StupidMode.csproj",
+        "projectUniqueName": "C:\\Users\\fnafl\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\StupidMode.csproj",
         "projectName": "StupidMode",
-        "projectPath": "C:\\Users\\uhhno\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\StupidMode.csproj",
-        "packagesPath": "C:\\Users\\uhhno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\uhhno\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\obj\\",
+        "projectPath": "C:\\Users\\fnafl\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\StupidMode.csproj",
+        "packagesPath": "C:\\Users\\fnafl\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\fnafl\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\uhhno\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\fnafl\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -60,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

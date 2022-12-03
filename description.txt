@@ -13,6 +13,4 @@ As of current, Stupid Mode adds various changes, both in boss fights and outside
 
 ~ Moon Lord (I added something to the fight, although the mod does not cover all content up to this point.)
 
-Every boss already has their changes planned out, and I am rapidly pushing updates for the mod.
-
-It should be noted that this mod is made up of whatever garbage ideas I get without much further thought, so the mod may not be balanced the best, however I'm trying to keep it possible at least. Bosses may vary in difficulty more than expected, perhaps the mod is impossibly hard. I make this mod for the fun of making it, not the fun of playing it. If you attempt this, I salute you for sacrificing your time and sanity.
+This mod has not been tested for multiplayer, and does not actively support other mods. Although, code for multiplayer compatibility is in the mod.

@@ -20,7 +20,7 @@ namespace StupidMode.Content.Projectiles
             Projectile.aiStyle = ProjAIStyleID.Explosive;
             Projectile.hostile = true;
             Projectile.friendly = false;
-            Projectile.damage = 12;
+            Projectile.damage = 20;
             Projectile.knockBack = 1;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.tileCollide = false;
