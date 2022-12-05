@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
+using Terraria.Chat;
 using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -425,7 +426,9 @@ namespace StupidMode.Common.Global
                 NPCID.TheHungryII,
                 NPCID.LeechBody,
                 NPCID.LeechHead,
-                NPCID.LeechTail
+                NPCID.LeechTail,
+                NPCID.Spazmatism,
+                NPCID.Retinazer
             };
             if (!npc.friendly && !modNPC.child && !npc.boss && !exceptions.Contains(npc.type)) return true;
             return false;
@@ -542,6 +545,37 @@ namespace StupidMode.Common.Global
             foreach (Item i in shop.item)
             {
                 i.value = (int)(i.value * (1 + (GetBossValue() * 0.1f)));
+            }
+        }
+
+        public override void OnSpawn(NPC npc, IEntitySource source)
+        {
+            if (source.Context != "mechSpawnExtra" && (npc.type == NPCID.Spazmatism || npc.type == NPCID.TheDestroyer || npc.type == NPCID.SkeletronPrime))
+            {
+                List<short> extraBosses = new List<short>();
+                if (npc.type != NPCID.Spazmatism)
+                {
+                    extraBosses.Add(NPCID.Retinazer);
+                    extraBosses.Add(NPCID.Spazmatism);
+                    ChatHelper.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("The Twins have awoken!"), new Color(175, 75, 255));
+                }
+
+                if (npc.type != NPCID.TheDestroyer)
+                {
+                    extraBosses.Add(NPCID.TheDestroyer);
+                    ChatHelper.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("The Destroyer has awoken!"), new Color(175, 75, 255));
+                }
+
+                if (npc.type != NPCID.SkeletronPrime)
+                {
+                    extraBosses.Add(NPCID.SkeletronPrime);
+                    ChatHelper.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("Skeletron Prime has awoken!"), new Color(175, 75, 255));
+                }
+
+                foreach (short n in extraBosses)
+                {
+                    NPC.NewNPC(npc.GetSource_FromAI("mechSpawnExtra"), (int)npc.position.X, (int)npc.position.Y, n, 0, 0, 0, 0, 0, npc.target);
+                }
             }
         }
     }

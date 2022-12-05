@@ -40,6 +40,14 @@ namespace StupidMode.Common.Global
                 for (int a = 0; a < 10; a++)
                     Dust.NewDust(projectile.position, 10, 10, DustID.Snow, 0, 2, 0, default, Main.rand.NextFloat(0.5f, 2));
             }
+
+            if (projectile.type == ProjectileID.PoisonDart)
+            {
+                int whoAmI = Projectile.NewProjectile(Projectile.GetSource_NaturalSpawn(), projectile.position, projectile.velocity * 2, ProjectileID.Boulder, 200, 2f);
+                Main.projectile[whoAmI].width = projectile.width;
+                Main.projectile[whoAmI].height = projectile.height;
+                projectile.Kill();
+            }
         }
     }
 }
