@@ -1,0 +1,2 @@
+﻿- Dart Traps now shoot bouilders.
+- All Mechanical Bosses now have their changes implemented.

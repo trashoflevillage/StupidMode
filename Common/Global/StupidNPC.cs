@@ -21,6 +21,7 @@ namespace StupidMode.Common.Global
 
         public bool child;
         public bool dropMeteorite;
+        public bool isMechCthulhu;
 
         public IDictionary<string, Cooldown> cooldowns = new Dictionary<string, Cooldown>();
         public IDictionary<string, bool> triggers = new Dictionary<string, bool>();
@@ -79,6 +80,8 @@ namespace StupidMode.Common.Global
                 NewCooldown(npc, NPCID.WallofFlesh, "regurgitate", 180, true, -1);
 
                 NewCooldown(npc, NPCID.WallofFleshEye, "boulderThrowWOF", 120);
+
+                NewCooldown(npc, NPCID.SkeletronPrime, "babyGuardian", 3600);
             }
         }
 
@@ -401,6 +404,55 @@ namespace StupidMode.Common.Global
                         ProjectileID.Boulder, 200, 5f);
                 }
             }
+
+            if (cooldowns.ContainsKey("babyGuardian"))
+            {
+                if (cooldowns["babyGuardian"].TickCooldown())
+                {
+                    int whoAmI = NewChild(npc.GetSource_FromAI("babyGuardian"), (int)npc.position.X, (int)npc.position.Y, NPCID.DungeonGuardian);
+                    Main.npc[whoAmI].life = 10;
+                    Main.npc[whoAmI].lifeMax = 10;
+                    Main.npc[whoAmI].dontTakeDamageFromHostiles = true;
+                    SoundEngine.PlaySound(SoundID.Roar);
+                    ChatHelper.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("Baby Dungeon Guardian has awoken!"), new Color(175, 75, 255));
+                }
+            }
+
+            if (modNPC.isMechCthulhu)
+            {
+                NPC spazm = Main.npc[NPC.FindFirstNPC(NPCID.Spazmatism)];
+                NPC retina = Main.npc[NPC.FindFirstNPC(NPCID.Retinazer)];
+                npc.lifeMax = spazm.lifeMax + retina.lifeMax;
+                npc.life = spazm.life + retina.life;
+            }
+
+            short[] mechTypes = new short[]
+            {
+                    NPCID.Spazmatism,
+                    NPCID.Retinazer,
+                    NPCID.TheDestroyer,
+                    NPCID.TheDestroyerBody,
+                    NPCID.TheDestroyerTail,
+                    NPCID.SkeletronPrime
+            };
+            if (mechTypes.Contains((short)npc.type))
+            {
+
+                bool enrage = false;
+                foreach (short i in mechTypes)
+                {
+                    if (NPC.FindFirstNPC(i) == -1)
+                    {
+                        enrage = true;
+                        break;
+                    }
+                }
+
+                if (enrage)
+                {
+                    npc.dontTakeDamage = true;
+                }
+            }
         }
         
         /// <summary>
@@ -576,6 +628,14 @@ namespace StupidMode.Common.Global
                 {
                     NPC.NewNPC(npc.GetSource_FromAI("mechSpawnExtra"), (int)npc.position.X, (int)npc.position.Y, n, 0, 0, 0, 0, 0, npc.target);
                 }
+            }
+
+            if (npc.type == NPCID.Spazmatism)
+            {
+                int whoAmI = NPC.NewNPC(npc.GetSource_FromAI("mechEyeOfCthulhu"), (int)npc.position.X, (int)npc.position.Y, NPCID.EyeofCthulhu);
+                Main.npc[whoAmI].dontTakeDamage = true;
+                Main.npc[whoAmI].GetGlobalNPC<StupidNPC>().isMechCthulhu = true;
+                ChatHelper.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("Eye of Cthulhu awoken!"), new Color(175, 75, 255));
             }
         }
     }
