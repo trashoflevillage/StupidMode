@@ -75,5 +75,18 @@ namespace StupidMode.Common.Global
                 Main.npc[NPC.NewNPC(NPC.GetSource_NaturalSpawn(), i * 16, j * 16, NPCID.MeteorHead)].GetGlobalNPC<StupidNPC>().dropMeteorite = true;
             }
         }
+
+        public override bool CanPlace(int i, int j, int type)
+        {
+            if (type == TileID.PlanteraBulb)
+            {
+                if (j > Main.worldSurface)
+                {
+                    return false;
+                }
+            }
+
+            return base.CanPlace(i, j, type);
+        }
     }
 }
