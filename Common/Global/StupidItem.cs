@@ -33,24 +33,6 @@ namespace StupidMode.Common.Global
             modItem.reforgeCount++;
         }
 
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            StupidItem modItem = item.GetGlobalItem<StupidItem>();
-            if (item.IsCandidateForReforge) tooltips.Add(new TooltipLine(StupidMode.Instance, "reforgeCounter", "[c/FFF014:" + modItem.reforgeCount + "/10 reforges]"));
-
-            if (item.type == ItemID.MechanicalEye || item.type == ItemID.MechanicalWorm || item.type == ItemID.MechanicalSkull)
-            {
-                if (item.type != ItemID.MechanicalEye)
-                    tooltips.Insert(tooltips.FindLastIndex(i => i.Name.StartsWith("Tooltip")) + 1, new TooltipLine(StupidMode.Instance, "spawnsTwins", ".. and The Twins"));
-
-                if (item.type != ItemID.MechanicalWorm)
-                    tooltips.Insert(tooltips.FindLastIndex(i => i.Name.StartsWith("Tooltip")) + 1, new TooltipLine(StupidMode.Instance, "spawnsTwins", ".. and The Destroyer"));
-
-                if (item.type != ItemID.MechanicalSkull)
-                    tooltips.Insert(tooltips.FindLastIndex(i => i.Name.StartsWith("Tooltip")) + 1, new TooltipLine(StupidMode.Instance, "spawnsTwins", ".. and Skeletron Prime"));
-            }
-        }
-
         public override void LoadData(Item item, TagCompound tag)
         {
             StupidItem modItem = item.GetGlobalItem<StupidItem>();

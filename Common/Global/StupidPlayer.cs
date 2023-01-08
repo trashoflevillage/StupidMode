@@ -57,6 +57,8 @@ namespace StupidMode.Common.Global
             {
                 if (Player.ZoneDesert)
                     Player.AddBuff(BuffID.OnFire, 60, false);
+                if (Player.position.Y / 16 > Main.UnderworldLayer && !Player.HasBuff(BuffID.ObsidianSkin))
+                    Player.AddBuff(BuffID.OnFire3, 60, false);
             }
 
             if (Player.ZoneJungle)

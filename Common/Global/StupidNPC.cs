@@ -79,6 +79,12 @@ namespace StupidMode.Common.Global
                 NewCooldown(npc, NPCID.WallofFlesh, "regurgitate", 180, true, -1);
 
                 NewCooldown(npc, NPCID.WallofFleshEye, "boulderThrowWOF", 120);
+
+                NewCooldown(npc, NPCID.Spazmatism, "boulderThrowActivate", 340, false);
+                NewCooldown(npc, NPCID.Spazmatism, "boulderThrowSpazm", 180, false, -1);
+
+                NewCooldown(npc, NPCID.Retinazer, "laserRingActivate", 340);
+                NewCooldown(npc, NPCID.Retinazer, "laserRing", 180, true, -1);
             }
         }
 
@@ -138,17 +144,11 @@ namespace StupidMode.Common.Global
                     Main.projectile[index.Value].timeLeft = 300;
                 }
             }
-        }
 
-        public override bool PreAI(NPC npc)
-        {
-            if (npc.type == NPCID.KingSlime)
+            if (npc.position.Y / 16 > Main.UnderworldLayer)
             {
-                if (npc.velocity.Y == 0) npc.reflectsProjectiles = true;
-                else npc.reflectsProjectiles = false;
+                WorldGen.PlaceLiquid(npc.position.ToTileCoordinates().X, npc.position.ToTileCoordinates().Y, LiquidID.Lava, 5);
             }
-
-            return base.PreAI(npc);
         }
 
         public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
@@ -258,23 +258,104 @@ namespace StupidMode.Common.Global
                 }
             }
 
+            if (cooldowns.ContainsKey("boulderThrowSpazm"))
+            {
+                if (npc.life <= npc.lifeMax * 0.4)
+                {
+                    if (cooldowns["boulderThrowSpazm"].val == -1 && cooldowns["boulderThrowActivate"].TickCooldown())
+                    {
+                        cooldowns["boulderThrowSpazm"].val = 0;
+                    }
+
+                    if (cooldowns["boulderThrowSpazm"].val >= 0)
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            Vector2 pos = npc.Center;
+                            pos.Y += Main.rand.Next((npc.height / 2) * -1, (npc.height / 2));
+                            pos.X += Main.rand.Next((npc.width / 2) * -1, (npc.width / 2));
+                            Dust.NewDust(pos, 4, 4, DustID.Electric);
+                        }
+
+                        if (cooldowns["boulderThrowSpazm"].TickCooldown())
+                        {
+                            int? index;
+                            for (int i = 0; i < Main.rand.Next(4, 8); i++)
+                            {
+                                index = NewHostileProjectile(npc.GetSource_FromAI(), npc.Center, new Vector2(Main.rand.Next(-16, 16), Main.rand.Next(-16, 0)), ProjectileID.Boulder, npc.damage * 8, 3f);
+                                Main.projectile[index.Value].tileCollide = false;
+                            }
+                            SoundEngine.PlaySound(SoundID.Item80, npc.Center);
+                            cooldowns["boulderThrowSpazm"].val = -1;
+                        }
+                    }
+                }
+            }
+
+            if (cooldowns.ContainsKey("laserRing"))
+            {
+                if (npc.life <= npc.lifeMax * 0.4)
+                {
+                    if (cooldowns["laserRing"].val == -1 && cooldowns["laserRingActivate"].TickCooldown())
+                    {
+                        cooldowns["laserRing"].val = 0;
+                    }
+
+                    if (cooldowns["laserRing"].val >= 0)
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            Vector2 pos = npc.Center;
+                            pos.Y += Main.rand.Next((npc.height / 2) * -1, (npc.height / 2));
+                            pos.X += Main.rand.Next((npc.width / 2) * -1, (npc.width / 2));
+                            Dust.NewDust(pos, 4, 4, DustID.Electric);
+                        }
+
+                        if (cooldowns["laserRing"].TickCooldown())
+                        {
+                            for (int i = 0; i < Main.rand.Next(4, 8); i++)
+                            {
+                                Vector2[] velocities = new Vector2[]
+                                {
+                                    new Vector2(1, 1),
+                                    new Vector2(1, -1),
+                                    new Vector2(-1, 1),
+                                    new Vector2(-1, -1),
+                                    new Vector2(0, 1),
+                                    new Vector2(1, 0),
+                                    new Vector2(0, -1),
+                                    new Vector2(-1, 0)
+                                };
+
+                                foreach (Vector2 v in velocities)
+                                {
+                                    NewHostileProjectile(npc.GetSource_FromAI(), npc.position, v * 5, ProjectileID.DeathLaser, 300, 3);
+                                }
+                            }
+                            SoundEngine.PlaySound(SoundID.Item33, npc.Center);
+                            cooldowns["laserRing"].val = -1;
+                        }
+                    }
+                }
+            }
+
             if (cooldowns.ContainsKey("waterbolt"))
             {
                 if (cooldowns["waterbolt"].TickCooldown())
                 {
-                    int timeLeft = 240;
-                    int dmg = 20;
-                    int? index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(5, 5), ProjectileID.WaterBolt, dmg, 3);
-                    Main.projectile[index.Value].timeLeft = timeLeft;
+                    Vector2[] velocities = new Vector2[]
+                    {
+                        new Vector2(5, 5),
+                        new Vector2(5, -5),
+                        new Vector2(-5, 5),
+                        new Vector2(-5, -5)
+                    };
 
-                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(5, -5), ProjectileID.WaterBolt, dmg, 3);
-                    Main.projectile[index.Value].timeLeft = timeLeft;
-
-                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(-5, 5), ProjectileID.WaterBolt, dmg, 3);
-                    Main.projectile[index.Value].timeLeft = timeLeft;
-
-                    index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, new Vector2(-5, -5), ProjectileID.WaterBolt, dmg, 3);
-                    Main.projectile[index.Value].timeLeft = timeLeft;
+                    foreach (Vector2 v in velocities)
+                    {
+                        int? index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, v, ProjectileID.WaterBolt, 20, 3);
+                        Main.projectile[index.Value].timeLeft = 240;
+                    }
                 }
             }
 
@@ -441,6 +522,16 @@ namespace StupidMode.Common.Global
                 cooldowns[key] = new Cooldown(counterMax, defaultVal);
             }
         }
+        public void NewCooldown(NPC[] npcs, int npcType, string key, int counterMax, bool moonLordCopiesAbility = true, int? defaultVal = null)
+        {
+            foreach (NPC npc in npcs)
+            {
+                if (npc.type == npcType || (npc.type == NPCID.MoonLordCore && moonLordCopiesAbility))
+                {
+                    cooldowns[key] = new Cooldown(counterMax, defaultVal);
+                }
+            }
+        }
 
         /// <summary>
         /// Attempts to set a trigger to be triggered.
@@ -491,7 +582,7 @@ namespace StupidMode.Common.Global
         /// <param name="ai0"></param>
         /// <param name="ai1"></param>
         /// <returns></returns>
-        public int? NewHostileProjectile(IEntitySource spawnSource, Vector2 position, Vector2 velocity, int Type, int Damage, float KnockBack, int Owner = 255, float ai0 = 0, float ai1 = 0)
+        public static int? NewHostileProjectile(IEntitySource spawnSource, Vector2 position, Vector2 velocity, int Type, int Damage, float KnockBack, int Owner = 255, float ai0 = 0, float ai1 = 0)
         {
             int? output = null;
             if (Main.netMode != NetmodeID.MultiplayerClient)
@@ -545,37 +636,6 @@ namespace StupidMode.Common.Global
             foreach (Item i in shop.item)
             {
                 i.value = (int)(i.value * (1 + (GetBossValue() * 0.1f)));
-            }
-        }
-
-        public override void OnSpawn(NPC npc, IEntitySource source)
-        {
-            if (source.Context != "mechSpawnExtra" && (npc.type == NPCID.Spazmatism || npc.type == NPCID.TheDestroyer || npc.type == NPCID.SkeletronPrime))
-            {
-                List<short> extraBosses = new List<short>();
-                if (npc.type != NPCID.Spazmatism)
-                {
-                    extraBosses.Add(NPCID.Retinazer);
-                    extraBosses.Add(NPCID.Spazmatism);
-                    ChatHelper.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("The Twins have awoken!"), new Color(175, 75, 255));
-                }
-
-                if (npc.type != NPCID.TheDestroyer)
-                {
-                    extraBosses.Add(NPCID.TheDestroyer);
-                    ChatHelper.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("The Destroyer has awoken!"), new Color(175, 75, 255));
-                }
-
-                if (npc.type != NPCID.SkeletronPrime)
-                {
-                    extraBosses.Add(NPCID.SkeletronPrime);
-                    ChatHelper.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("Skeletron Prime has awoken!"), new Color(175, 75, 255));
-                }
-
-                foreach (short n in extraBosses)
-                {
-                    NPC.NewNPC(npc.GetSource_FromAI("mechSpawnExtra"), (int)npc.position.X, (int)npc.position.Y, n, 0, 0, 0, 0, 0, npc.target);
-                }
             }
         }
     }
