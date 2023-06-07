@@ -14,7 +14,7 @@ namespace StupidMode.Common.Global
     internal class StupidItem : GlobalItem
     {
         public override bool InstancePerEntity => true;
-
+/*
         int reforgeCount = 0;
 
         public override bool CanReforge(Item item)
@@ -45,6 +45,6 @@ namespace StupidMode.Common.Global
         {
             StupidItem modItem = item.GetGlobalItem<StupidItem>();
             tag.Set("reforgeCount", modItem.reforgeCount);
-        }
+        }*/
     }
 }
