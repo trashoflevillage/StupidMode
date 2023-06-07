@@ -17,14 +17,14 @@ namespace StupidMode.Common.Global
 
         int reforgeCount = 0;
 
-        public override bool PreReforge(Item item)
+        public override bool CanReforge(Item item)
         {
             StupidItem modItem = item.GetGlobalItem<StupidItem>();
             if (modItem.reforgeCount >= 10)
             {
                 return false;
             }
-            return base.PreReforge(item);
+            return base.CanReforge(item);
         }
 
         public override void PostReforge(Item item)

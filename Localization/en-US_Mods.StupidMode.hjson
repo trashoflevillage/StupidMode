@@ -1,0 +1,11 @@
+Buffs: {
+	Misguided: {
+		DisplayName: Misguided
+		Description: Mods.StupidMode.Buffs.Misguided.Description
+	}
+}
+
+Projectiles: {
+	Bloodbolt.DisplayName: Bloodbolt
+	MeanBeenade.DisplayName: Mean Beenade
+}

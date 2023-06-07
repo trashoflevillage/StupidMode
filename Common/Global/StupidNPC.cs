@@ -147,28 +147,28 @@ namespace StupidMode.Common.Global
 
             if (npc.position.Y / 16 > Main.UnderworldLayer)
             {
-                WorldGen.PlaceLiquid(npc.position.ToTileCoordinates().X, npc.position.ToTileCoordinates().Y, LiquidID.Lava, 5);
+                WorldGen.PlaceLiquid(npc.position.ToTileCoordinates().X, npc.position.ToTileCoordinates().Y, (byte)LiquidID.Lava, 5);
             }
         }
 
-        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
             if (projectile.type == ProjectileID.Boulder)
             {
-                damage = 0;
-                knockback = 0;
-                crit = false;
+                modifiers.FinalDamage *= 0;
+                modifiers.Knockback *= 0;
+                modifiers.DisableCrit();
             }
         }
 
-        public override void OnHitByProjectile(NPC npc, Projectile projectile, int damage, float knockback, bool crit)
+        public override void OnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
         {
-            OnHitByAnything(npc, damage, knockback, crit);
+            OnHitByAnything(npc, hit, damageDone);
         }
 
-        public override void OnHitByItem(NPC npc, Player player, Item item, int damage, float knockback, bool crit)
+        public override void OnHitByItem(NPC npc, Player player, Item item, NPC.HitInfo hit, int damageDone)
         {
-            OnHitByAnything(npc, damage, knockback, crit);
+            OnHitByAnything(npc, hit, damageDone);
         }
 
         public override bool PreKill(NPC npc)
@@ -182,7 +182,7 @@ namespace StupidMode.Common.Global
             return base.PreKill(npc);
         }
 
-        public void OnHitByAnything(NPC npc, int damage, float knockback, bool crit)
+        public void OnHitByAnything(NPC npc, NPC.HitInfo hit, int damageDone)
         {
             if (npc.type == NPCID.WallofFlesh || npc.type == NPCID.WallofFleshEye)
             {
@@ -548,7 +548,7 @@ namespace StupidMode.Common.Global
             return false;
         }
 
-        public override void ModifyHitPlayer(NPC npc, Player target, ref int damage, ref bool crit)
+        public override void ModifyHitPlayer(NPC npc, Player target, ref Player.HurtModifiers modifiers)
         {
             int[] beeTypes = new int[]
             {
@@ -559,7 +559,7 @@ namespace StupidMode.Common.Global
 
             if (target.HasBuff(BuffID.Honey) && beeTypes.Contains(npc.type))
             {
-                damage *= 3;
+                modifiers.FinalDamage *= 3;
             }
 
             if (npc.type == NPCID.Deerclops)
@@ -631,9 +631,9 @@ namespace StupidMode.Common.Global
             return val;
         }
 
-        public override void SetupShop(int type, Chest shop, ref int nextSlot)
+        public override void ModifyActiveShop(NPC npc, string shopName, Item[] items)
         {
-            foreach (Item i in shop.item)
+            foreach (Item i in items)
             {
                 i.value = (int)(i.value * (1 + (GetBossValue() * 0.1f)));
             }

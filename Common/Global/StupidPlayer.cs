@@ -12,17 +12,17 @@ namespace StupidMode.Common.Global
 {
     internal class StupidPlayer : ModPlayer
     {
-        public override void OnHitByNPC(NPC npc, int damage, bool crit)
+        public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
         {
-            OnHitByAnything(damage, crit);
+            OnHitByAnything(hurtInfo);
         }
 
-        public override void OnHitByProjectile(Projectile proj, int damage, bool crit)
+        public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
         {
-            OnHitByAnything(damage, crit);
+            OnHitByAnything(hurtInfo);
         }
 
-        public void OnHitByAnything(int damage, bool crit)
+        public void OnHitByAnything(Player.HurtInfo hurtInfo)
         {
             if (Player.ZoneCorrupt)
             {

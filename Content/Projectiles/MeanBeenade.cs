@@ -27,7 +27,7 @@ namespace StupidMode.Content.Projectiles
             Projectile.timeLeft = 60;
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             Explode();
         }

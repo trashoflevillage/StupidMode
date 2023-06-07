@@ -13,8 +13,8 @@ namespace StupidMode.Content.Buffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Misguided");
-            Description.SetDefault("There is nobody around to guide you. You feel directionless.");
+            // DisplayName.SetDefault("Misguided");
+            // Description.SetDefault("There is nobody around to guide you. You feel directionless.");
             Main.debuff[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }
