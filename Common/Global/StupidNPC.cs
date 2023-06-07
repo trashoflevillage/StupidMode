@@ -492,26 +492,42 @@ namespace StupidMode.Common.Global
         public static bool CanSplit(NPC npc)
         {
             StupidNPC modNPC = npc.GetGlobalNPC<StupidNPC>();
-            int[] exceptions = new int[] {
-                NPCID.EaterofWorldsHead,
-                NPCID.EaterofWorldsBody,
-                NPCID.EaterofWorldsTail,
-                NPCID.Creeper,
-                NPCID.ServantofCthulhu,
-                NPCID.MoonLordHand,
-                NPCID.MoonLordHead,
-                NPCID.MoonLordCore,
-                NPCID.MoonLordFreeEye,
-                NPCID.MoonLordLeechBlob,
-                NPCID.TheHungry,
-                NPCID.TheHungryII,
-                NPCID.LeechBody,
-                NPCID.LeechHead,
-                NPCID.LeechTail,
-                NPCID.Spazmatism,
-                NPCID.Retinazer
+            int[] slimes = new int[] {
+                NPCID.GreenSlime,
+                NPCID.BlueSlime,
+                NPCID.RedSlime,
+                NPCID.PurpleSlime,
+                NPCID.YellowSlime,
+                NPCID.BlackSlime,
+                NPCID.IceSlime,
+                NPCID.SandSlime,
+                NPCID.JungleSlime,
+                NPCID.SpikedIceSlime,
+                NPCID.SpikedJungleSlime,
+                NPCID.LavaSlime,
+                NPCID.DungeonSlime,
+                NPCID.Pinky,
+                NPCID.GoldenSlime,
+                NPCID.SlimeSpiked,
+                NPCID.UmbrellaSlime,
+                NPCID.BunnySlimed,
+                NPCID.SlimeRibbonWhite,
+                NPCID.SlimeRibbonYellow,
+                NPCID.SlimeRibbonGreen,
+                NPCID.SlimeRibbonRed,
+                NPCID.ToxicSludge,
+                NPCID.Crimslime,
+                NPCID.BigCrimslime,
+                NPCID.LittleCrimslime,
+                NPCID.Gastropod,
+                NPCID.IlluminantSlime,
+                NPCID.RainbowSlime,
+                NPCID.QueenSlimeMinionBlue,
+                NPCID.QueenSlimeMinionPurple,
+                NPCID.QueenSlimeMinionPink,
+                NPCID.HoppinJack
             };
-            if (!npc.friendly && !modNPC.child && !npc.boss && !exceptions.Contains(npc.type)) return true;
+            if (!npc.friendly && !modNPC.child && !npc.boss && slimes.Contains(npc.type)) return true;
             return false;
         }
 
