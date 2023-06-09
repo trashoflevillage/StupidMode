@@ -90,6 +90,7 @@ namespace StupidMode.Common.Global
 
         public override void OnKill(NPC npc)
         {
+            SpecialLoot(npc);
             StupidNPC modNPC = npc.GetGlobalNPC<StupidNPC>();
             if (CanSplit(npc))
                 for (int i = 0; i < 2; i++)
@@ -143,6 +144,43 @@ namespace StupidMode.Common.Global
                     int? index = NewHostileProjectile(npc.GetSource_Death(), npc.Center, new Vector2(Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-16, -1)), ProjectileID.SpikyBall, 8, 1f);
                     Main.projectile[index.Value].timeLeft = 300;
                 }
+            }
+
+            int[] skeletons = new int[]
+            {
+                NPCID.Skeleton,
+                NPCID.SkeletonAlien,
+                NPCID.SkeletonArcher,
+                NPCID.SkeletonAstonaut,
+                NPCID.SkeletonCommando,
+                NPCID.SkeletonMerchant,
+                NPCID.SkeletonSniper,
+                NPCID.SkeletonTopHat,
+                NPCID.ArmoredSkeleton,
+                NPCID.BigHeadacheSkeleton,
+                NPCID.BigMisassembledSkeleton,
+                NPCID.BigPantlessSkeleton,
+                NPCID.BigSkeleton,
+                NPCID.BoneThrowingSkeleton,
+                NPCID.BoneThrowingSkeleton2,
+                NPCID.BoneThrowingSkeleton3,
+                NPCID.BoneThrowingSkeleton4,
+                NPCID.GreekSkeleton,
+                NPCID.HeadacheSkeleton,
+                NPCID.HeavySkeleton,
+                NPCID.MisassembledSkeleton,
+                NPCID.PantlessSkeleton,
+                NPCID.SmallHeadacheSkeleton,
+                NPCID.SmallMisassembledSkeleton,
+                NPCID.SmallPantlessSkeleton,
+                NPCID.SmallSkeleton,
+                NPCID.SporeSkeleton,
+                NPCID.TacticalSkeleton
+            };
+
+            if (skeletons.Contains(npc.type) && Main.rand.NextFloat() < 0.25f)
+            {
+                NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.position.X, (int)npc.position.Y, ModContent.NPCType<Content.NPCs.FlyingSkull>());
             }
 
             if (npc.position.Y / 16 > Main.UnderworldLayer)
@@ -652,6 +690,21 @@ namespace StupidMode.Common.Global
             foreach (Item i in items)
             {
                 i.value = (int)(i.value * (1 + (GetBossValue() * 0.1f)));
+            }
+        }
+        
+        private void SpecialLoot(NPC npc)
+        {
+            int? dropItem = null;
+
+            switch(npc.type)
+            {
+                case NPCID.EyeofCthulhu: dropItem = ModContent.ItemType<Content.Items.Accessories.BoulderCharm>(); break;
+            }
+
+            if (dropItem != null)
+            {
+                npc.DropItemInstanced(npc.position, npc.Size, dropItem.Value, 1, true);
             }
         }
     }

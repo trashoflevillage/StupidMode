@@ -31,24 +31,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\uhhno\\.nuget\\packages\\": {},
-    "C:\\Users\\uhhno\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder": {}
+    "C:\\Users\\uhhno\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\StupidMode.csproj",
+      "projectUniqueName": "C:\\Users\\uhhno\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\StupidMode.csproj",
       "projectName": "StupidMode",
-      "projectPath": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\StupidMode.csproj",
+      "projectPath": "C:\\Users\\uhhno\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\StupidMode.csproj",
       "packagesPath": "C:\\Users\\uhhno\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\obj\\",
+      "outputPath": "C:\\Users\\uhhno\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Users\\uhhno\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder"
-      ],
       "configFilePaths": [
         "C:\\Users\\uhhno\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Users\\uhhno\\AppData\\Roaming\\NuGet\\config\\Godot.Offline.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -85,8 +80,7 @@
           "net47",
           "net471",
           "net472",
-          "net48",
-          "net481"
+          "net48"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -95,7 +89,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

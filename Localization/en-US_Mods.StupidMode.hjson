@@ -1,11 +1,20 @@
 Buffs: {
 	Misguided: {
 		DisplayName: Misguided
-		Description: Mods.StupidMode.Buffs.Misguided.Description
+		Description: You have no sense of guidance.
 	}
 }
 
 Projectiles: {
 	Bloodbolt.DisplayName: Bloodbolt
-	MeanBeenade.DisplayName: Mean Beenade
+	MeanBeenade.DisplayName: Beenade
 }
+
+Items: {
+	BoulderCharm: {
+		DisplayName: Cthulhu's Lucky Boulder Charm
+		Tooltip: Boulders cannot deal more than half of the wearer's maximum health
+	}
+}
+
+NPCs.FlyingSkull.DisplayName: Flying Skull

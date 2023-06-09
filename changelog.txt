@@ -1,7 +1,9 @@
-﻿- 1.4.4 support!
+﻿+ 1.4.4 support!
 - King Slime's projectile reflection has been removed.
-- Darts from traps (Of both varieties) will now explode into boulders upon impact with a tile.
-- You now get Hellfire in Hell when either not behind a background wall or using Obsidian Skin.
-- Creatures in Hell now create lava upon death. Beware of voodoo demons!
-- Only slimes will split into babies.
-- You will only light aflame in the Desert during the daytime.
++ Darts from traps (Of both varieties) will now explode into boulders upon impact with a tile.
++ You now get Hellfire in Hell when either not behind a background wall or using Obsidian Skin.
++ Creatures in Hell now create lava upon death. Beware of voodoo demons!
+/ Only slimes will split into babies.
+/ You will only light aflame in the Desert during the daytime.
++ Bosses now have exclusive drops.
+ -> Cthulhu's Lucky Boulder Charm

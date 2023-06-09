@@ -12,6 +12,8 @@ namespace StupidMode.Common.Global
 {
     internal class StupidPlayer : ModPlayer
     {
+        public bool boulderCharm = false;
+
         public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
         {
             OnHitByAnything(hurtInfo);
@@ -35,6 +37,19 @@ namespace StupidMode.Common.Global
             }
         }
 
+        public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModifiers modifiers)
+        {
+            StupidPlayer modPlayer = Player.GetModPlayer<StupidPlayer>();
+            if (modPlayer.boulderCharm)
+            {
+                if (proj.type == ProjectileID.Boulder || proj.type == ProjectileID.BouncyBoulder || proj.type == ProjectileID.BoulderStaffOfEarth || proj.type == ProjectileID.MiniBoulder ||
+                    proj.type == ProjectileID.MoonBoulder || proj.type == ProjectileID.LifeCrystalBoulder)
+                {
+                    modifiers.SetMaxDamage(Player.statLifeMax2 / 2);
+                }
+            }
+        }
+
         public override void PreUpdateBuffs()
         {
             if (NPC.GetFirstNPCNameOrNull(NPCID.Guide) == null)
@@ -46,6 +61,12 @@ namespace StupidMode.Common.Global
         public override void PreUpdate()
         {
             PassiveEffects();
+        }
+
+        public override void ResetEffects()
+        {
+            StupidPlayer modPlayer = Player.GetModPlayer<StupidPlayer>();
+            modPlayer.boulderCharm = false;
         }
 
         public void PassiveEffects()
