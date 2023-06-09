@@ -15,6 +15,14 @@ Items: {
 		DisplayName: Cthulhu's Lucky Boulder Charm
 		Tooltip: Boulders cannot deal more than half of the wearer's maximum health
 	}
+
+	NinjaSlice: {
+		DisplayName: Ninja Slice
+		Tooltip: ""
+		KeybindTooltip: "Allows the user to strike a taunt by pressing "
+	}
 }
 
 NPCs.FlyingSkull.DisplayName: Flying Skull
+Keybinds.TauntKeybind.DisplayName: Taunt
+UnboundKeybind: Unbound

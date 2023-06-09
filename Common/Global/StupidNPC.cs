@@ -736,6 +736,7 @@ namespace StupidMode.Common.Global
 
             switch(npc.type)
             {
+                case NPCID.KingSlime: dropItem = ModContent.ItemType<Content.Items.Accessories.NinjaSlice>(); break;
                 case NPCID.EyeofCthulhu: dropItem = ModContent.ItemType<Content.Items.Accessories.BoulderCharm>(); break;
             }
 

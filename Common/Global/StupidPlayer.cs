@@ -7,25 +7,34 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameContent.Events;
+using Terraria.GameInput;
+using StupidMode.Common.Systems;
+using Terraria.Audio;
+using Microsoft.Xna.Framework;
 
 namespace StupidMode.Common.Global
 {
     internal class StupidPlayer : ModPlayer
     {
         public bool boulderCharm = false;
+        public bool ninjaSlice = false;
+        public int taunting = 0;
+        Vector2? velBeforeTaunting;
 
         public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
         {
-            OnHitByAnything(hurtInfo);
+            OnHitByAnything(ref hurtInfo);
         }
 
         public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
         {
-            OnHitByAnything(hurtInfo);
+            OnHitByAnything(ref hurtInfo);
         }
 
-        public void OnHitByAnything(Player.HurtInfo hurtInfo)
+        public void OnHitByAnything(ref Player.HurtInfo hurtInfo)
         {
+            StupidPlayer modPlayer = Player.GetModPlayer<StupidPlayer>();
+
             if (Player.ZoneCorrupt)
             {
                 Player.AddBuff(BuffID.CursedInferno, 120);
@@ -67,6 +76,7 @@ namespace StupidMode.Common.Global
         {
             StupidPlayer modPlayer = Player.GetModPlayer<StupidPlayer>();
             modPlayer.boulderCharm = false;
+            modPlayer.ninjaSlice = false;
         }
 
         public void PassiveEffects()
@@ -87,6 +97,65 @@ namespace StupidMode.Common.Global
                 if (Player.breath < Player.breathMax)
                     Player.AddBuff(BuffID.Poisoned, 60, false);
             }
+
+            if (taunting > 0)
+            {
+                taunting--;
+            }
+        }
+
+        public override void PreUpdateMovement()
+        {
+            if (taunting > 0) Player.velocity = new Vector2(0, 0);
+            else if (velBeforeTaunting != null)
+            {
+                Player.velocity = velBeforeTaunting.Value;
+                velBeforeTaunting = null;
+            }
+        }
+
+        public override bool CanUseItem(Item item)
+        {
+            if (taunting > 0) return false;
+            return base.CanUseItem(item);
+        }
+
+        public override bool FreeDodge(Player.HurtInfo info)
+        {
+            if (taunting > 0)
+            {
+                TauntParry(info);
+                return true;
+            }
+            return base.FreeDodge(info);
+        }
+
+        public override void ProcessTriggers(TriggersSet triggersSet)
+        {
+            if (KeybindSystem.TauntKeybind.JustPressed)
+            {
+                if (ninjaSlice == true && taunting == 0)
+                {
+                    Taunt();
+                }
+            }
+        }
+
+        public void Taunt()
+        {
+            StupidPlayer modPlayer = Player.GetModPlayer<StupidPlayer>();
+            SoundEngine.PlaySound(new SoundStyle("StupidMode/Assets/Sounds/taunt"), Player.position);
+            modPlayer.taunting = 15;
+            velBeforeTaunting = Player.velocity;
+        }
+
+        public void TauntParry(Player.HurtInfo info)
+        {
+            StupidPlayer modPlayer = Player.GetModPlayer<StupidPlayer>();
+            SoundEngine.PlaySound(new SoundStyle("StupidMode/Assets/Sounds/tauntParry"), Player.position);
+            modPlayer.taunting = 0;
+            Player.SetImmuneTimeForAllTypes(60);
+            Player.immuneNoBlink = true;
         }
     }
 }
