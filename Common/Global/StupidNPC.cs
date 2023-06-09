@@ -22,6 +22,8 @@ namespace StupidMode.Common.Global
         public bool child;
         public bool dropMeteorite;
 
+        public static int eaterSwarmCooldown = 24;
+
         public IDictionary<string, Cooldown> cooldowns = new Dictionary<string, Cooldown>();
         public IDictionary<string, bool> triggers = new Dictionary<string, bool>();
 
@@ -80,8 +82,8 @@ namespace StupidMode.Common.Global
 
                 NewCooldown(npc, NPCID.WallofFleshEye, "boulderThrowWOF", 120);
 
-                NewCooldown(npc, NPCID.Spazmatism, "boulderThrowActivate", 340, false);
-                NewCooldown(npc, NPCID.Spazmatism, "boulderThrowSpazm", 180, false, -1);
+                NewCooldown(npc, NPCID.Spazmatism, "bouncyBoulderThrowActivate", 340, false);
+                NewCooldown(npc, NPCID.Spazmatism, "bouncyBoulderThrow", 180, false, -1);
 
                 NewCooldown(npc, NPCID.Retinazer, "laserRingActivate", 340);
                 NewCooldown(npc, NPCID.Retinazer, "laserRing", 180, true, -1);
@@ -186,6 +188,17 @@ namespace StupidMode.Common.Global
             if (npc.position.Y / 16 > Main.UnderworldLayer)
             {
                 WorldGen.PlaceLiquid(npc.position.ToTileCoordinates().X, npc.position.ToTileCoordinates().Y, (byte)LiquidID.Lava, 5);
+            }
+
+            if (npc.type == NPCID.EaterofWorldsTail || npc.type == NPCID.EaterofWorldsBody || npc.type == NPCID.EaterofWorldsHead)
+            {
+                eaterSwarmCooldown--;
+                if (eaterSwarmCooldown == 0)
+                {
+                    eaterSwarmCooldown = 24;
+                    SoundEngine.PlaySound(SoundID.Roar, npc.position);
+                    SummonEnemySwarm(npc.GetSource_FromAI(), NPCID.EaterofSouls, 50, npc.position);
+                }
             }
         }
 
@@ -296,16 +309,24 @@ namespace StupidMode.Common.Global
                 }
             }
 
-            if (cooldowns.ContainsKey("boulderThrowSpazm"))
+            if (cooldowns.ContainsKey("bouncyBoulderThrow"))
             {
                 if (npc.life <= npc.lifeMax * 0.4)
                 {
-                    if (cooldowns["boulderThrowSpazm"].val == -1 && cooldowns["boulderThrowActivate"].TickCooldown())
+                    int otherTwin = NPC.FindFirstNPC(NPCID.Retinazer);
+                    if (otherTwin != -1 && Main.npc[otherTwin].life > Main.npc[otherTwin].lifeMax * 0.4)
                     {
-                        cooldowns["boulderThrowSpazm"].val = 0;
+                        npc.dontTakeDamage = true;
+                    } else
+                    {
+                        npc.dontTakeDamage = false;
+                    }
+                    if (cooldowns["bouncyBoulderThrow"].val == -1 && cooldowns["bouncyBoulderThrowActivate"].TickCooldown())
+                    {
+                        cooldowns["bouncyBoulderThrow"].val = 0;
                     }
 
-                    if (cooldowns["boulderThrowSpazm"].val >= 0)
+                    if (cooldowns["bouncyBoulderThrow"].val >= 0)
                     {
                         for (int i = 0; i < 3; i++)
                         {
@@ -315,16 +336,16 @@ namespace StupidMode.Common.Global
                             Dust.NewDust(pos, 4, 4, DustID.Electric);
                         }
 
-                        if (cooldowns["boulderThrowSpazm"].TickCooldown())
+                        if (cooldowns["bouncyBoulderThrow"].TickCooldown())
                         {
                             int? index;
-                            for (int i = 0; i < Main.rand.Next(4, 8); i++)
+                            for (int i = 0; i < 15; i++)
                             {
-                                index = NewHostileProjectile(npc.GetSource_FromAI(), npc.Center, new Vector2(Main.rand.Next(-16, 16), Main.rand.Next(-16, 0)), ProjectileID.Boulder, npc.damage * 8, 3f);
-                                Main.projectile[index.Value].tileCollide = false;
+                                index = NewHostileProjectile(npc.GetSource_FromAI(), npc.Center, new Vector2(Main.rand.Next(-16, 16), Main.rand.Next(-16, 0)), ProjectileID.BouncyBoulder, npc.damage * 8, 3f);
+                                Main.projectile[index.Value].tileCollide = true;
                             }
                             SoundEngine.PlaySound(SoundID.Item80, npc.Center);
-                            cooldowns["boulderThrowSpazm"].val = -1;
+                            cooldowns["bouncyBoulderThrow"].val = -1;
                         }
                     }
                 }
@@ -334,6 +355,15 @@ namespace StupidMode.Common.Global
             {
                 if (npc.life <= npc.lifeMax * 0.4)
                 {
+                    int otherTwin = NPC.FindFirstNPC(NPCID.Spazmatism);
+                    if (otherTwin != -1 && Main.npc[otherTwin].life > Main.npc[otherTwin].lifeMax * 0.4)
+                    {
+                        npc.dontTakeDamage = true;
+                    }
+                    else
+                    {
+                        npc.dontTakeDamage = false;
+                    }
                     if (cooldowns["laserRing"].val == -1 && cooldowns["laserRingActivate"].TickCooldown())
                     {
                         cooldowns["laserRing"].val = 0;
@@ -393,18 +423,6 @@ namespace StupidMode.Common.Global
                     {
                         int? index = NewHostileProjectile(npc.GetSource_FromAI(), npc.position, v, ProjectileID.WaterBolt, 20, 3);
                         Main.projectile[index.Value].timeLeft = 240;
-                    }
-                }
-            }
-
-            if (npc.type == NPCID.EaterofWorldsBody || npc.type == NPCID.EaterofWorldsHead || npc.type == NPCID.EaterofWorldsTail)
-            {
-                for (int x = -1; x < 2; x++)
-                {
-                    for (int y = -1; y < 2; y++)
-                    {
-                        if (Framing.GetTileSafely((int)(npc.position.X / 16) + x, (int)(npc.position.Y / 16) + y)
-                            .TileType == TileID.Platforms) WorldGen.KillTile((int)(npc.position.X / 16) + x, (int)(npc.position.Y / 16) + y, false, false, true);
                     }
                 }
             }
@@ -518,6 +536,25 @@ namespace StupidMode.Common.Global
                     NewHostileProjectile(npc.GetSource_FromAI(), npc.Center, 
                         npc.DirectionTo(Main.player[npc.target].position) * 20,
                         ProjectileID.Boulder, 200, 5f);
+                }
+            }
+
+            if (npc.type == NPCID.TheDestroyer)
+            {
+                // Make the destroyer's probes upgrade with each incrementation of health.
+                if (npc.life <= npc.lifeMax / 3)
+                {
+
+                }
+
+                if (npc.life <= (npc.lifeMax / 3) + (npc.lifeMax / 3))
+                {
+
+                }
+
+                if (npc.life <= npc.lifeMax - (npc.lifeMax / 3))
+                {
+
                 }
             }
         }
@@ -705,6 +742,41 @@ namespace StupidMode.Common.Global
             if (dropItem != null)
             {
                 npc.DropItemInstanced(npc.position, npc.Size, dropItem.Value, 1, true);
+            }
+        }
+
+        public void SummonEnemySwarm(IEntitySource source, int type, int size, Vector2 pos)
+        {
+            Vector2 newPos;
+            Vector2 tilePos;
+            int shiftDirection;
+            bool hasTile;
+            for (int i = 0; i < size; i++)
+            {
+                newPos.X = pos.X + Main.rand.NextFloat(-2000, 2000);
+                newPos.Y = pos.Y + Main.rand.NextFloat(-2000, 2000);
+                tilePos = newPos.ToTileCoordinates16().ToVector2();
+                hasTile = Framing.GetTileSafely(tilePos).HasTile;
+                if (hasTile)
+                {
+                    if (newPos.Y > pos.Y) shiftDirection = -1;
+                    else shiftDirection = 1;
+                    for (int j = 0; j < 40; j++)
+                    {
+                        tilePos.Y += shiftDirection;
+                        hasTile = Framing.GetTileSafely(tilePos).HasTile;
+                        if (!hasTile)
+                        {
+                            break;
+                        }
+                    }
+                }
+                hasTile = Framing.GetTileSafely(tilePos).HasTile;
+                newPos = tilePos.ToWorldCoordinates();
+                if (!hasTile)
+                {
+                    NPC.NewNPC(source, (int)newPos.X, (int)newPos.Y, type);
+                }
             }
         }
     }

@@ -5,5 +5,8 @@
 + Creatures in Hell now create lava upon death. Beware of voodoo demons!
 / Only slimes will split into babies.
 / You will only light aflame in the Desert during the daytime.
-+ Bosses now have exclusive drops.
++ Some bosses now have Stupid Mode exclusive drops.
  -> Cthulhu's Lucky Boulder Charm
+/ The Eater of Worlds no longer destroys platforms, and instead summons swarms of Eater of Souls.
++ Twins have been changed.
++ The Destroyed has been changed.
