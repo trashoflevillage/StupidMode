@@ -1,7 +1,12 @@
 Buffs: {
 	Misguided: {
 		DisplayName: Misguided
-		Description: You have no sense of guidance.
+		Description: You have no sense of guidance
+	}
+
+	Overconfident: {
+		DisplayName: Overconfident
+		Description: Taunts will not parry
 	}
 }
 
@@ -18,7 +23,11 @@ Items: {
 
 	NinjaSlice: {
 		DisplayName: Ninja Slice
-		Tooltip: ""
+		Tooltip:
+			'''
+
+			Taunting when being attacked will prevent all damage
+			'''
 		KeybindTooltip: "Allows the user to strike a taunt by pressing "
 	}
 }

@@ -122,7 +122,7 @@ namespace StupidMode.Common.Global
 
         public override bool FreeDodge(Player.HurtInfo info)
         {
-            if (taunting > 0)
+            if (taunting > 0 && !Player.HasBuff(ModContent.BuffType<Content.Buffs.Overconfident>()))
             {
                 TauntParry(info);
                 return true;
@@ -153,6 +153,7 @@ namespace StupidMode.Common.Global
         {
             StupidPlayer modPlayer = Player.GetModPlayer<StupidPlayer>();
             SoundEngine.PlaySound(new SoundStyle("StupidMode/Assets/Sounds/tauntParry"), Player.position);
+            Player.AddBuff(ModContent.BuffType<Content.Buffs.Overconfident>(), 1800);
             modPlayer.taunting = 0;
             Player.SetImmuneTimeForAllTypes(60);
             Player.immuneNoBlink = true;

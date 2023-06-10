@@ -31,7 +31,7 @@ namespace StupidMode.Content.Items.Accessories
 			foreach (TooltipLine line in tooltips)
 			{
 				i++;
-				if (line.Name == "tooltip")
+				if (line.Name == "Tooltip0")
                 {
 					break;
                 }

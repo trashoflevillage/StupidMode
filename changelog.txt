@@ -9,4 +9,4 @@
  -> Ninja Slice (King Slime)
  -> Cthulhu's Lucky Boulder Charm (Eye Of Cthulhu)
 / The Eater of Worlds no longer destroys platforms, and instead summons swarms of Eater of Souls.
-+ Twins have been changed.
++ The Twins have been changed.
