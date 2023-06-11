@@ -258,6 +258,11 @@ namespace StupidMode.Common.Global
         {
             StupidNPC modNPC = npc.GetGlobalNPC<StupidNPC>();
 
+            if (npc.type == NPCID.KingSlime && modNPC.TryTrigger("spawnNinja"))
+            {
+                NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.position.X, (int)npc.position.Y, ModContent.NPCType<Content.NPCs.NinjaMinion>());
+            }
+
             if (cooldowns.ContainsKey("slimeSpike"))
             {
                 if (npc.life <= npc.lifeMax / 2)

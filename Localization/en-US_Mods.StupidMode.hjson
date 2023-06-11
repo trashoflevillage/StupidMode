@@ -32,6 +32,10 @@ Items: {
 	}
 }
 
-NPCs.FlyingSkull.DisplayName: Flying Skull
+NPCs: {
+	FlyingSkull.DisplayName: Flying Skull
+	NinjaMinion.DisplayName: Ninja
+}
+
 Keybinds.TauntKeybind.DisplayName: Taunt
 UnboundKeybind: Unbound

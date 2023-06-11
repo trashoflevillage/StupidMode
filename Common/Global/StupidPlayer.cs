@@ -19,6 +19,7 @@ namespace StupidMode.Common.Global
         public bool boulderCharm = false;
         public bool ninjaSlice = false;
         public int taunting = 0;
+        public int oldDirection = 0;
         Vector2? velBeforeTaunting;
 
         public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
@@ -106,12 +107,17 @@ namespace StupidMode.Common.Global
 
         public override void PreUpdateMovement()
         {
-            if (taunting > 0) Player.velocity = new Vector2(0, 0);
+            if (taunting > 0)
+            {
+                Player.direction = oldDirection;
+                Player.velocity = new Vector2(0, 0);
+            }
             else if (velBeforeTaunting != null)
             {
                 Player.velocity = velBeforeTaunting.Value;
                 velBeforeTaunting = null;
             }
+            oldDirection = Player.direction;
         }
 
         public override bool CanUseItem(Item item)
@@ -132,11 +138,14 @@ namespace StupidMode.Common.Global
 
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (KeybindSystem.TauntKeybind.JustPressed)
+            if (!Player.dead)
             {
-                if (ninjaSlice == true && taunting == 0)
+                if (KeybindSystem.TauntKeybind.JustPressed)
                 {
-                    Taunt();
+                    if (ninjaSlice == true && taunting == 0)
+                    {
+                        Taunt();
+                    }
                 }
             }
         }
@@ -145,7 +154,7 @@ namespace StupidMode.Common.Global
         {
             StupidPlayer modPlayer = Player.GetModPlayer<StupidPlayer>();
             SoundEngine.PlaySound(new SoundStyle("StupidMode/Assets/Sounds/taunt"), Player.position);
-            modPlayer.taunting = 15;
+            modPlayer.taunting = 20;
             velBeforeTaunting = Player.velocity;
         }
 
