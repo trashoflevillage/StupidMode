@@ -30,6 +30,16 @@ Items: {
 			'''
 		KeybindTooltip: "Allows the user to strike a taunt by pressing "
 	}
+
+	CrimsonOrb: {
+		DisplayName: Crimson Orb
+		Tooltip: "Prevents Ichor from being caused by taking damage in the Crimson"
+	}
+
+	ShadowHeart: {
+		DisplayName: Corrupted Heart
+		Tooltip: "Prevents Cursed Inferno from being caused by taking damage in the Corruption"
+	}
 }
 
 NPCs: {

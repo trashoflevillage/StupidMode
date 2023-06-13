@@ -18,6 +18,8 @@ namespace StupidMode.Common.Global
     {
         public bool boulderCharm = false;
         public bool ninjaSlice = false;
+        public bool crimsonOrb = false;
+        public bool shadowHeart = false;
         public int taunting = 0;
         public int oldDirection = 0;
         Vector2? velBeforeTaunting;
@@ -36,12 +38,12 @@ namespace StupidMode.Common.Global
         {
             StupidPlayer modPlayer = Player.GetModPlayer<StupidPlayer>();
 
-            if (Player.ZoneCorrupt)
+            if (Player.ZoneCorrupt && !modPlayer.shadowHeart)
             {
                 Player.AddBuff(BuffID.CursedInferno, 120);
             }
 
-            if (Player.ZoneCrimson)
+            if (Player.ZoneCrimson && !modPlayer.crimsonOrb)
             {
                 Player.AddBuff(BuffID.Ichor, 240);
             }
