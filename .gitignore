@@ -28,3 +28,15 @@ obj/Debug/net6.0/StupidMode.GeneratedMSBuildEditorConfig.editorconfig
 *.editorconfig
 *.cache
 *.cache
+*.1
+.vs/ProjectEvaluation/stupidmode.metadata.v6.1
+.vs/ProjectEvaluation/stupidmode.projects.v6.1
+.vs/StupidMode/DesignTimeBuild/.dtbcache.v2
+.vs/StupidMode/FileContentIndex/2c3f4637-0ad8-40bd-be68-ab2a77be7814.vsidx
+.vs/StupidMode/FileContentIndex/57a000cd-db7c-4e03-9fea-06274f54f6dd.vsidx
+.vs/StupidMode/v17/.suo
+obj/Debug/net6.0/StupidMode.assets.cache
+obj/project.assets.json
+obj/project.nuget.cache
+obj/StupidMode.csproj.nuget.dgspec.json
+obj/StupidMode.csproj.nuget.g.props
