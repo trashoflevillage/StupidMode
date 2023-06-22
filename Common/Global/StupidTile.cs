@@ -101,13 +101,13 @@ namespace StupidMode.Common.Global
                                 modNPC.additionalLoot = new Item[chest.item.Length];
                                 for (int inventoryIndexB = 0; inventoryIndexB < 40; inventoryIndexB++)
                                 {
+                                    modNPC.additionalLoot[inventoryIndexB] = new Item(ItemID.None);
                                     if (chest.item[inventoryIndexB].type != ItemID.None && chest.item[inventoryIndexB].type != ModContent.ItemType<Mimicifier>())
                                     {
-                                        modNPC.additionalLoot[inventoryIndexB].SetDefaults(chest.item[inventoryIndexB].type);
-                                        modNPC.additionalLoot[inventoryIndexB].prefix = chest.item[inventoryIndexB].prefix;
-                                        modNPC.additionalLoot[inventoryIndexB].stack = chest.item[inventoryIndexB].stack;
+                                        modNPC.additionalLoot[inventoryIndexB] = new Item(chest.item[inventoryIndexB].type, chest.item[inventoryIndexB].stack, chest.item[inventoryIndexB].prefix);
                                     }
                                     chest.item[inventoryIndexB].SetDefaults(ItemID.None);
+                                    WorldGen.KillTile(chest.x, chest.y, false, false, true);
                                 }
                                 break;
                             }
