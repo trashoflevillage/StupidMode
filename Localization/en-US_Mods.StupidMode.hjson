@@ -33,12 +33,17 @@ Items: {
 
 	CrimsonOrb: {
 		DisplayName: Crimson Orb
-		Tooltip: "Prevents Ichor from being caused by taking damage in the Crimson"
+		Tooltip: Prevents Ichor from being caused by taking damage in the Crimson
 	}
 
 	ShadowHeart: {
 		DisplayName: Corrupted Heart
-		Tooltip: "Prevents Cursed Inferno from being caused by taking damage in the Corruption"
+		Tooltip: Prevents Cursed Inferno from being caused by taking damage in the Corruption
+	}
+
+	Mimicifier: {
+		DisplayName: Mimicifier
+		Tooltip: You should not have this item.
 	}
 }
 
@@ -49,3 +54,8 @@ NPCs: {
 
 Keybinds.TauntKeybind.DisplayName: Taunt
 UnboundKeybind: Unbound
+
+DropConditions: {
+	IsNotChild: Mods.StupidMode.DropConditions.IsNotChild
+	IsNotMimicTrap: Mods.StupidMode.DropConditions.IsNotMimicTrap
+}

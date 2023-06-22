@@ -21,6 +21,10 @@ namespace StupidMode.Common.Global
 
         public bool child;
         public bool dropMeteorite;
+        public bool mimicTrap;
+        public bool noLoot;
+
+        public Item[]? additionalLoot = null;
 
         public static int eaterSwarmCooldown = 24;
 
@@ -229,7 +233,11 @@ namespace StupidMode.Common.Global
                 Projectile.NewProjectile(npc.GetSource_Death(), npc.position, npc.velocity * -1, ProjectileID.Boulder, 100, 5);
             }
 
-            if (modNPC.child) return false;
+            if (modNPC.child || modNPC.mimicTrap)
+            {
+                modNPC.noLoot = true;
+                npc.value = 0;
+            }
             return base.PreKill(npc);
         }
 
@@ -743,6 +751,14 @@ namespace StupidMode.Common.Global
             {
                 case NPCID.KingSlime: dropItem = ModContent.ItemType<Content.Items.Accessories.NinjaSlice>(); break;
                 case NPCID.EyeofCthulhu: dropItem = ModContent.ItemType<Content.Items.Accessories.BoulderCharm>(); break;
+            }
+
+            StupidNPC modNPC = npc.GetGlobalNPC<StupidNPC>();
+            if (modNPC.additionalLoot != null)
+            {
+                foreach (Item i in modNPC.additionalLoot) {
+                    Item.NewItem(npc.GetSource_Loot(), npc.getRect(), i);
+                }
             }
 
             if (dropItem != null)

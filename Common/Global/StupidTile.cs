@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using StupidMode.Content.Items.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -73,6 +75,36 @@ namespace StupidMode.Common.Global
             {
                 noItem = true;
                 Main.npc[NPC.NewNPC(NPC.GetSource_NaturalSpawn(), i * 16, j * 16, NPCID.MeteorHead)].GetGlobalNPC<StupidNPC>().dropMeteorite = true;
+            }
+        }
+
+        public override void RightClick(int i, int j, int type)
+        {
+            if (type == 21)
+            {
+                for (int chestIndex = 0; chestIndex < 1000; chestIndex++)
+                {
+                    Chest chest = Main.chest[chestIndex];
+
+                    int[] xCheck = new int[] { i - 1, i, i + 1 };
+                    int[] yCheck = new int[] { j - 1, j, j + 1 };
+
+                    if (chest != null && xCheck.Contains(chest.x) && yCheck.Contains(chest.y) && Main.tile[chest.x, chest.y].TileType == TileID.Containers)
+                    {
+                        for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                        {
+                            if (chest.item[inventoryIndex].type == ModContent.ItemType<Mimicifier>())
+                            {
+                                int mimic = NPC.NewNPC(new EntitySource_TileInteraction(Main.player[0], i, j), chest.x * 16, chest.y * 16, NPCID.Mimic);
+                                StupidNPC modNPC = Main.npc[mimic].GetGlobalNPC<StupidNPC>();
+                                modNPC.mimicTrap = true;
+                                modNPC.additionalLoot = chest.item;
+                                modNPC.additionalLoot[inventoryIndex].SetDefaults(ItemID.None);
+                                break;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
