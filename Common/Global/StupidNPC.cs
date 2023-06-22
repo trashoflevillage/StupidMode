@@ -757,7 +757,10 @@ namespace StupidMode.Common.Global
             if (modNPC.additionalLoot != null)
             {
                 foreach (Item i in modNPC.additionalLoot) {
-                    Item.NewItem(npc.GetSource_Loot(), npc.getRect(), i);
+                    if (i.type != ItemID.None)
+                    {
+                        Item.NewItem(npc.GetSource_Loot(), npc.getRect(), i);
+                    }
                 }
             }
 

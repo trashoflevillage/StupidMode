@@ -89,7 +89,7 @@ namespace StupidMode.Common.Global
                     int[] xCheck = new int[] { i - 1, i, i + 1 };
                     int[] yCheck = new int[] { j - 1, j, j + 1 };
 
-                    if (chest != null && xCheck.Contains(chest.x) && yCheck.Contains(chest.y) && Main.tile[chest.x, chest.y].TileType == TileID.Containers)
+                    if (chest != null && xCheck.Contains(chest.x) && yCheck.Contains(chest.y) && Main.tile[chest.x, chest.y].TileType == TileID.Containers && !Chest.IsLocked(i, j))
                     {
                         for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
                         {
@@ -98,8 +98,17 @@ namespace StupidMode.Common.Global
                                 int mimic = NPC.NewNPC(new EntitySource_TileInteraction(Main.player[0], i, j), chest.x * 16, chest.y * 16, NPCID.Mimic);
                                 StupidNPC modNPC = Main.npc[mimic].GetGlobalNPC<StupidNPC>();
                                 modNPC.mimicTrap = true;
-                                modNPC.additionalLoot = chest.item;
-                                modNPC.additionalLoot[inventoryIndex].SetDefaults(ItemID.None);
+                                modNPC.additionalLoot = new Item[chest.item.Length];
+                                for (int inventoryIndexB = 0; inventoryIndexB < 40; inventoryIndexB++)
+                                {
+                                    if (chest.item[inventoryIndexB].type != ItemID.None && chest.item[inventoryIndexB].type != ModContent.ItemType<Mimicifier>())
+                                    {
+                                        modNPC.additionalLoot[inventoryIndexB].SetDefaults(chest.item[inventoryIndexB].type);
+                                        modNPC.additionalLoot[inventoryIndexB].prefix = chest.item[inventoryIndexB].prefix;
+                                        modNPC.additionalLoot[inventoryIndexB].stack = chest.item[inventoryIndexB].stack;
+                                    }
+                                    chest.item[inventoryIndexB].SetDefaults(ItemID.None);
+                                }
                                 break;
                             }
                         }
