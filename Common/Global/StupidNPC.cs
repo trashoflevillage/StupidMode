@@ -183,7 +183,7 @@ namespace StupidMode.Common.Global
                 NPCID.SporeSkeleton,
                 NPCID.TacticalSkeleton
             };
-
+            
             if (skeletons.Contains(npc.type) && Main.rand.NextFloat() < 0.25f)
             {
                 NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.position.X, (int)npc.position.Y, ModContent.NPCType<Content.NPCs.FlyingSkull>());
@@ -197,6 +197,11 @@ namespace StupidMode.Common.Global
                     eaterSwarmCooldown = 24;
                     SoundEngine.PlaySound(SoundID.Roar, npc.position);
                     SummonEnemySwarm(npc.GetSource_FromAI(), NPCID.EaterofSouls, 50, npc.position);
+                }
+
+                if (NPC.CountNPCS(NPCID.EaterofWorldsHead) + NPC.CountNPCS(NPCID.EaterofWorldsBody) + NPC.CountNPCS(NPCID.EaterofWorldsTail) == 1)
+                {
+                    npc.DropItemInstanced(npc.position, npc.Size, ModContent.ItemType<Content.Items.Accessories.ShadowHeart>(), 1, true);
                 }
             }
         }
