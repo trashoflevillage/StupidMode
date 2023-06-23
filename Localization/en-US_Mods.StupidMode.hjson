@@ -13,6 +13,7 @@ Buffs: {
 Projectiles: {
 	Bloodbolt.DisplayName: Bloodbolt
 	MeanBeenade.DisplayName: Beenade
+	Bloodbeam.DisplayName: Bloodbeam
 }
 
 Items: {
@@ -33,7 +34,11 @@ Items: {
 
 	CrimsonOrb: {
 		DisplayName: Crimson Orb
-		Tooltip: Prevents Ichor from being caused by taking damage in the Crimson
+		Tooltip:
+			'''
+			Spawns a Crimson Orb that attacks nearby enemies
+			Prevents Ichor from being caused by taking damage in the Crimson
+			'''
 	}
 
 	ShadowHeart: {
@@ -43,13 +48,18 @@ Items: {
 
 	Mimicifier: {
 		DisplayName: Mimicifier
-		Tooltip: You should not have this item.
+		Tooltip:
+			'''
+			You should not have this item
+			Used for developer testing and triggering mimic traps
+			'''
 	}
 }
 
 NPCs: {
 	FlyingSkull.DisplayName: Flying Skull
 	NinjaMinion.DisplayName: Ninja
+	CrimsonOrbMinion.DisplayName: Crimson Orb Minion
 }
 
 Keybinds.TauntKeybind.DisplayName: Taunt

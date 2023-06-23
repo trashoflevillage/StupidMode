@@ -730,13 +730,13 @@ namespace StupidMode.Common.Global
             return val;
         }
 
-        public override void ModifyActiveShop(NPC npc, string shopName, Item[] items)
+        /*public override void ModifyActiveShop(NPC npc, string shopName, Item[] items)
         {
             foreach (Item i in items)
             {
                 i.value = (int)(i.value * (1 + (GetBossValue() * 0.1f)));
             }
-        }
+        }*/
         
         private void SpecialLoot(NPC npc)
         {
@@ -746,6 +746,7 @@ namespace StupidMode.Common.Global
             {
                 case NPCID.KingSlime: dropItem = ModContent.ItemType<Content.Items.Accessories.NinjaSlice>(); break;
                 case NPCID.EyeofCthulhu: dropItem = ModContent.ItemType<Content.Items.Accessories.BoulderCharm>(); break;
+                case NPCID.BrainofCthulhu: dropItem = ModContent.ItemType<Content.Items.Accessories.CrimsonOrb>(); break;
             }
 
             StupidNPC modNPC = npc.GetGlobalNPC<StupidNPC>();
@@ -798,6 +799,38 @@ namespace StupidMode.Common.Global
                     NPC.NewNPC(source, (int)newPos.X, (int)newPos.Y, type);
                 }
             }
+        }
+        
+        public static int? FindClosestNPC(Vector2 position, bool includeFriendly, bool includeNotFriendly, bool includeCreatures, bool includeInvulnerable, NPC type = null, int? maximumDistance = null)
+        {
+            NPC closestNPC = null;
+            float? oldDistance = null;
+            float distance;
+
+            foreach (NPC i in Main.npc)
+            {
+                if (i.active && i.type != NPCID.TargetDummy && (!includeInvulnerable || !i.dontTakeDamage) && ((i.friendly && includeFriendly) || (!Main.npcCatchable[i.type] && !i.friendly && includeNotFriendly) || (Main.npcCatchable[i.type] && includeCreatures)))
+                {
+                    if (type == null || i.type == type.value)
+                    {
+                        distance = position.Distance(i.position);
+                        if (maximumDistance == null || distance <= maximumDistance)
+                            if (oldDistance == null)
+                            {
+                                oldDistance = distance;
+                                closestNPC = i;
+                            }
+                            else if (distance < oldDistance)
+                            {
+                                oldDistance = distance;
+                                closestNPC = i;
+                            }
+                    }
+                }
+            }
+
+            if (closestNPC == null) return null;
+            return closestNPC.whoAmI;
         }
     }
 }

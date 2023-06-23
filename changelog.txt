@@ -4,9 +4,11 @@
 + You now get Hellfire in Hell when either not behind a background wall or using Obsidian Skin.
 + Creatures in Hell now create lava upon death. Beware of voodoo demons!
 / Only slimes will split into babies.
+/ Baby creatures will now drop stolen coins.
 / You will only light aflame in the Desert during the daytime.
 + Some bosses now have Stupid Mode exclusive drops.
  -> Ninja Slice (King Slime)
  -> Cthulhu's Lucky Boulder Charm (Eye Of Cthulhu)
 / The Eater of Worlds no longer destroys platforms, and instead summons swarms of Eater of Souls.
 + The Twins have been changed.
++ All naturally generated chests are now mimics.

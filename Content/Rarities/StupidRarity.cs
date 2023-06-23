@@ -6,6 +6,6 @@ namespace StupidMode.Content.Rarities
 {
 	public class StupidRarity : ModRarity
 	{
-		public override Color RarityColor => new Color(Main.DiscoR, Main.DiscoB, Main.DiscoG);
+		public override Color RarityColor => new(65, 181, 109);
 	}
 }

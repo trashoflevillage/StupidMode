@@ -11,6 +11,7 @@ using Terraria.GameInput;
 using StupidMode.Common.Systems;
 using Terraria.Audio;
 using Microsoft.Xna.Framework;
+using StupidMode.Content.NPCs;
 
 namespace StupidMode.Common.Global
 {
@@ -19,6 +20,7 @@ namespace StupidMode.Common.Global
         public bool boulderCharm = false;
         public bool ninjaSlice = false;
         public bool crimsonOrb = false;
+        public bool hasCrimsonOrbMinion = false;
         public bool shadowHeart = false;
         public int taunting = 0;
         public int oldDirection = 0;
@@ -80,6 +82,28 @@ namespace StupidMode.Common.Global
             StupidPlayer modPlayer = Player.GetModPlayer<StupidPlayer>();
             modPlayer.boulderCharm = false;
             modPlayer.ninjaSlice = false;
+            modPlayer.crimsonOrb = false;
+            modPlayer.shadowHeart = false;
+        }
+
+        public override void PostUpdateEquips()
+        {
+            StupidPlayer modPlayer = Player.GetModPlayer<StupidPlayer>();
+            if (!modPlayer.crimsonOrb)
+            {
+                if (modPlayer.hasCrimsonOrbMinion)
+                {
+                    foreach (NPC i in Main.npc)
+                    {
+                        if (i.type == ModContent.NPCType<CrimsonOrbMinion>() && i.ai[0] == Player.whoAmI)
+                        {
+                            i.active = false;
+                            break;
+                        }
+                    }
+                    modPlayer.hasCrimsonOrbMinion = false;
+                }
+            }
         }
 
         public void PassiveEffects()
