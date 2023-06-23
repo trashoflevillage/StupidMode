@@ -27,9 +27,10 @@ namespace StupidMode.Common.Global
             TileID.Tungsten,
             TileID.Silver
         };
+
         public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
-            if (type == TileID.Trees && !fail && !effectOnly)
+            /*if (type == TileID.Trees && !fail && !effectOnly)
             {
                 if (Main.rand.NextBool(150))
                 {
@@ -69,7 +70,7 @@ namespace StupidMode.Common.Global
             if (type == TileID.Tombstones && !fail && !effectOnly && !noItem)
             {
                 Main.npc[NPC.NewNPC(Entity.GetSource_NaturalSpawn(), i * 16, j * 16, NPCID.Ghost)].value = 0;
-            }
+            }*/
 
             if (type == TileID.Meteorite && !fail && !effectOnly && !noItem)
             {

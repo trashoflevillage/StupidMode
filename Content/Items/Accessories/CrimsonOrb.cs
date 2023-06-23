@@ -1,6 +1,7 @@
 ﻿using StupidMode.Common.Global;
 using StupidMode.Content.NPCs;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -22,9 +23,10 @@ namespace StupidMode.Content.Items.Accessories
             player.GetModPlayer<StupidPlayer>().crimsonOrb = true;
             StupidPlayer modPlayer = player.GetModPlayer<StupidPlayer>();
 
-            if (!modPlayer.hasCrimsonOrbMinion)
+            if (!modPlayer.hasCrimsonOrbMinion && !player.dead)
             {
                 modPlayer.hasCrimsonOrbMinion = true;
+                SoundEngine.PlaySound(SoundID.Item2, player.position);
                 NPC.NewNPC(player.GetSource_Accessory(Item, "crimsonOrb"), (int)player.position.X, (int)player.position.Y - 50, ModContent.NPCType<CrimsonOrbMinion>(), 0, player.whoAmI, 300);
             }
         }

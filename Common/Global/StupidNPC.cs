@@ -625,10 +625,7 @@ namespace StupidMode.Common.Global
         {
             foreach (NPC npc in npcs)
             {
-                if (npc.type == npcType || (npc.type == NPCID.MoonLordCore && moonLordCopiesAbility))
-                {
-                    cooldowns[key] = new Cooldown(counterMax, defaultVal);
-                }
+                NewCooldown(npc, npcType, key, counterMax, moonLordCopiesAbility, defaultVal);
             }
         }
 

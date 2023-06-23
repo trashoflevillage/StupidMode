@@ -20,6 +20,7 @@ namespace StupidMode.Content.NPCs
 
 		public ref float AI_Owner => ref NPC.ai[0];
 		public ref float Attack_Cooldown => ref NPC.ai[1];
+		public ref float Angle => ref NPC.ai[2];
 
 		public override void SetStaticDefaults()
 		{
@@ -42,31 +43,44 @@ namespace StupidMode.Content.NPCs
 			NPC.dontTakeDamage = true;
 			NPC.friendly = true;
 			NPC.ShowNameOnHover = false;
+			NPC.Opacity = 0.75f;
 		}
 
 		public override void AI()
 		{
-			NPC.position.X = Main.player[(int)AI_Owner].position.X;
-			NPC.position.Y = Main.player[(int)AI_Owner].position.Y - 100;
-			int? targetIndex = StupidNPC.FindClosestNPC(NPC.position, false, true, false, false, null, 800);
-
-			if (targetIndex.HasValue)
+			if (!Main.player[(int)AI_Owner].dead)
 			{
-				Attack_Cooldown--;
-				if (Attack_Cooldown == 0f)
+				int r = 125;
+				NPC.position.X = (r * (float)Math.Cos(Angle) + Main.player[(int)AI_Owner].Center.X) - NPC.width / 2;
+				NPC.position.Y = r * (float)Math.Sin(Angle) + Main.player[(int)AI_Owner].Center.Y;
+				Angle += 0.02f;
+
+				int? targetIndex = StupidNPC.FindClosestNPC(NPC.position, false, true, false, false, null, 800);
+
+				if (targetIndex.HasValue)
 				{
-					NPC.target = targetIndex.Value;
-					NPC target = Main.npc[targetIndex.Value];
-					NPC.TargetClosest(false);
+					Attack_Cooldown--;
+					if (Attack_Cooldown == 0f)
+					{
+						NPC.target = targetIndex.Value;
+						NPC target = Main.npc[targetIndex.Value];
+						NPC.TargetClosest(false);
+						Attack_Cooldown = 300;
+						SoundEngine.PlaySound(SoundID.Item72, NPC.position);
+						Projectile.NewProjectile(NPC.GetSource_FromAI("bloodBeamAttack"), NPC.Center, (target.Center - NPC.Center).SafeNormalize(Vector2.Zero),
+							ModContent.ProjectileType<Bloodbeam>(), NPC.damage, 0, -1);
+					}
+				}
+				else
+				{
 					Attack_Cooldown = 300;
-					SoundEngine.PlaySound(SoundID.Item72, NPC.position);
-					Projectile.NewProjectile(NPC.GetSource_FromAI("bloodBeamAttack"), NPC.Center, (target.Center - NPC.Center).SafeNormalize(Vector2.Zero),
-						ModContent.ProjectileType<Bloodbeam>(), NPC.damage, 0, -1);
 				}
 			} else
             {
-				Attack_Cooldown = 300;
-            }
+				StupidPlayer modPlayer = Main.player[(int)AI_Owner].GetModPlayer<StupidPlayer>();
+				modPlayer.hasCrimsonOrbMinion = false;
+				NPC.active = false;
+			}
 		}
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

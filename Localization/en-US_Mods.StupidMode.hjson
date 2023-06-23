@@ -36,7 +36,7 @@ Items: {
 		DisplayName: Crimson Orb
 		Tooltip:
 			'''
-			Spawns a Crimson Orb that attacks nearby enemies
+			Summons a Crimson Orb that shoots powerful blasts at enemies
 			Prevents Ichor from being caused by taking damage in the Crimson
 			'''
 	}
