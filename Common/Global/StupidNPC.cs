@@ -189,11 +189,6 @@ namespace StupidMode.Common.Global
                 NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.position.X, (int)npc.position.Y, ModContent.NPCType<Content.NPCs.FlyingSkull>());
             }
 
-            if (npc.position.Y / 16 > Main.UnderworldLayer)
-            {
-                WorldGen.PlaceLiquid(npc.position.ToTileCoordinates().X, npc.position.ToTileCoordinates().Y, (byte)LiquidID.Lava, 5);
-            }
-
             if (npc.type == NPCID.EaterofWorldsTail || npc.type == NPCID.EaterofWorldsBody || npc.type == NPCID.EaterofWorldsHead)
             {
                 eaterSwarmCooldown--;

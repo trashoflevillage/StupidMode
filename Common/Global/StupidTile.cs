@@ -80,16 +80,16 @@ namespace StupidMode.Common.Global
 
         public override void RightClick(int i, int j, int type)
         {
-            if (type == 21)
+            if (type == TileID.Containers || type == TileID.Containers2)
             {
-                for (int chestIndex = 0; chestIndex < 1000; chestIndex++)
+                for (int chestIndex = 0; chestIndex < Main.chest.Length; chestIndex++)
                 {
                     Chest chest = Main.chest[chestIndex];
 
                     int[] xCheck = new int[] { i - 1, i, i + 1 };
                     int[] yCheck = new int[] { j - 1, j, j + 1 };
 
-                    if (chest != null && xCheck.Contains(chest.x) && yCheck.Contains(chest.y) && Main.tile[chest.x, chest.y].TileType == TileID.Containers && !Chest.IsLocked(i, j))
+                    if (chest != null && xCheck.Contains(chest.x) && yCheck.Contains(chest.y) && (Main.tile[chest.x, chest.y].TileType == TileID.Containers || Main.tile[chest.x, chest.y].TileType == TileID.Containers2) && !Chest.IsLocked(i, j))
                     {
                         for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
                         {
@@ -109,9 +109,10 @@ namespace StupidMode.Common.Global
                                     chest.item[inventoryIndexB].SetDefaults(ItemID.None);
                                     WorldGen.KillTile(chest.x, chest.y, false, false, true);
                                 }
-                                break;
+                                return;
                             }
                         }
+                        return;
                     }
                 }
             }

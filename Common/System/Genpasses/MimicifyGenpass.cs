@@ -19,20 +19,19 @@ namespace StupidMode.Common.System.Genpasses
 
         protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
         {
-            int[] itemsToPlaceInIceChests = { ModContent.ItemType<Mimicifier>() };
-            int itemsToPlaceInIceChestsChoice = 0;
-            for (int chestIndex = 0; chestIndex < 1000; chestIndex++)
+            int[] itemsToPlaceInChests = { ModContent.ItemType<Mimicifier>() };
+            int itemsToPlaceInChestsChoice = 0;
+            for (int chestIndex = 0; chestIndex < Main.chest.Length; chestIndex++)
             {
                 Chest chest = Main.chest[chestIndex];
-                if (chest != null && Main.tile[chest.x, chest.y].TileType == TileID.Containers)
+                if (chest != null && (Main.tile[chest.x, chest.y].TileType == TileID.Containers || Main.tile[chest.x, chest.y].TileType == TileID.Containers2))
                 {
                     for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
                     {
                         if (chest.item[inventoryIndex].type == ItemID.None)
                         {
-                            chest.item[inventoryIndex].SetDefaults(itemsToPlaceInIceChests[itemsToPlaceInIceChestsChoice]);
-                            itemsToPlaceInIceChestsChoice = (itemsToPlaceInIceChestsChoice + 1) % itemsToPlaceInIceChests.Length;
-                            // Alternate approach: Random instead of cyclical: chest.item[inventoryIndex].SetDefaults(Main.rand.Next(itemsToPlaceInIceChests));
+                            chest.item[inventoryIndex].SetDefaults(itemsToPlaceInChests[itemsToPlaceInChestsChoice]);
+                            itemsToPlaceInChestsChoice = (itemsToPlaceInChestsChoice + 1) % itemsToPlaceInChests.Length;
                             break;
                         }
                     }

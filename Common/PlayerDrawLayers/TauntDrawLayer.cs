@@ -1,16 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using StupidMode.Common.Global;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 
-namespace StupidMode.Common.Global
+namespace StupidMode.Common.PlayerDrawLayers
 {
     internal class TauntDrawLayer : PlayerDrawLayer
 	{
 		private Asset<Texture2D> tauntTexture;
-		public override Position GetDefaultPosition() => new BeforeParent(PlayerDrawLayers.WebbedDebuffBack);
+		public override Position GetDefaultPosition() => new BeforeParent(Terraria.DataStructures.PlayerDrawLayers.WebbedDebuffBack);
 
 		public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
 		{
