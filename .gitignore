@@ -40,3 +40,6 @@ obj/project.assets.json
 obj/project.nuget.cache
 obj/StupidMode.csproj.nuget.dgspec.json
 obj/StupidMode.csproj.nuget.g.props
+.vs/StupidMode/v17/.futdcache.v1
+.vs/StupidMode/v17/.futdcache.v1
+*.v1

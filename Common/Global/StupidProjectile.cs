@@ -14,15 +14,9 @@ namespace StupidMode.Common.Global
 {
     internal class StupidProjectile : GlobalProjectile
     {
-        public override void SetStaticDefaults() { }
-
-        public override void SetDefaults(Projectile projectile)
-        {
-        }
-
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
-            if (Main.rand.NextBool(35) && projectile.type == ProjectileID.DeerclopsIceSpike)
+            if (Main.rand.NextBool(35) && projectile.type == ProjectileID.DeerclopsIceSpike && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 int[] potentialNPCs = new int[]
                 {
@@ -40,12 +34,13 @@ namespace StupidMode.Common.Global
                 Main.npc[index].velocity = new Vector2(Main.rand.Next(-2, 2), Main.rand.Next(-15, -10));
                 for (int a = 0; a < 10; a++)
                     Dust.NewDust(projectile.position, 10, 10, DustID.Snow, 0, 2, 0, default, Main.rand.NextFloat(0.5f, 2));
+                projectile.netUpdate = true;
             }
         }
 
         public override bool OnTileCollide(Projectile projectile, Vector2 oldVelocity)
         {
-            if (projectile.type == ProjectileID.PoisonDart)
+            if (projectile.type == ProjectileID.PoisonDart && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 int? index;
                 for (int i = 0; i < Main.rand.Next(4, 8); i++)
@@ -54,7 +49,7 @@ namespace StupidMode.Common.Global
                     Main.projectile[index.Value].tileCollide = false;
                 }
             }
-            else if (projectile.type == ProjectileID.PoisonDartTrap)
+            else if (projectile.type == ProjectileID.PoisonDartTrap && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 int? index;
                 for (int i = 0; i < Main.rand.Next(4, 8); i++)

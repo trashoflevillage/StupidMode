@@ -57,38 +57,42 @@ namespace StupidMode.Content.NPCs
 		}
 
         public override void AI()
-        {
-            int kingSlime = NPC.FindFirstNPC(NPCID.KingSlime);
-            if (kingSlime != -1)
+		{
+			if (Main.netMode != NetmodeID.MultiplayerClient)
 			{
-				if (taunting > 0)
+				int kingSlime = NPC.FindFirstNPC(NPCID.KingSlime);
+				if (kingSlime != -1)
 				{
-					NPC.frame.Y = 102;
-					NPC.velocity = new Vector2(0, 0);
-					taunting--;
+					if (taunting > 0)
+					{
+						NPC.frame.Y = 102;
+						NPC.velocity = new Vector2(0, 0);
+						taunting--;
+					}
+					else
+					{
+						NPC.frame.Y = 0;
+						NPC.FaceTarget();
+						Vector2 newVel = NPC.position.DirectionTo(new Vector2(Main.npc[kingSlime].Center.X, Main.npc[kingSlime].position.Y - 300)) + new Vector2(Main.rand.Next(-5, 5), 0);
+						newVel.X = Math.Clamp(newVel.X, -30, 30);
+						newVel.Y *= 3;
+						newVel.Y = Math.Clamp(newVel.Y, -200f, 200f);
+						NPC.velocity.X += newVel.X;
+						NPC.velocity.Y = newVel.Y;
+						tauntingCooldown--;
+						if (tauntingCooldown == 0)
+						{
+							tauntingCooldown = 1800;
+							Taunt();
+						}
+					}
 				}
 				else
 				{
-					NPC.frame.Y = 0;
-					NPC.FaceTarget();
-					Vector2 newVel = NPC.position.DirectionTo(new Vector2(Main.npc[kingSlime].Center.X, Main.npc[kingSlime].position.Y - 300)) + new Vector2(Main.rand.Next(-5, 5), 0);
-					newVel.X = Math.Clamp(newVel.X, -30, 30);
-					newVel.Y *= 3;
-					newVel.Y = Math.Clamp(newVel.Y, -200f, 200f);
-					NPC.velocity.X += newVel.X;
-					NPC.velocity.Y = newVel.Y;
-					tauntingCooldown--;
-					if (tauntingCooldown == 0)
-					{
-						tauntingCooldown = 1800;
-						Taunt();
-					}
+					NPC.active = false;
 				}
-            }
-            else
-            {
-                NPC.active = false;
-            }
+				NPC.netUpdate = true;
+			}
         }
 
         public override bool? CanFallThroughPlatforms()

@@ -116,19 +116,22 @@ namespace StupidMode.Common.Global
         public override void PostUpdateEquips()
         {
             StupidPlayer modPlayer = Player.GetModPlayer<StupidPlayer>();
-            if (!modPlayer.crimsonOrb)
+            if (Main.myPlayer == Player.whoAmI)
             {
-                if (modPlayer.hasCrimsonOrbMinion)
+                if (!modPlayer.crimsonOrb)
                 {
-                    foreach (NPC i in Main.npc)
+                    if (modPlayer.hasCrimsonOrbMinion)
                     {
-                        if (i.type == ModContent.NPCType<CrimsonOrbMinion>() && i.ai[0] == Player.whoAmI)
+                        foreach (NPC i in Main.npc)
                         {
-                            i.active = false;
-                            break;
+                            if (i.type == ModContent.NPCType<CrimsonOrbMinion>() && i.ai[0] == Player.whoAmI)
+                            {
+                                i.active = false;
+                                break;
+                            }
                         }
+                        modPlayer.hasCrimsonOrbMinion = false;
                     }
-                    modPlayer.hasCrimsonOrbMinion = false;
                 }
             }
         }
@@ -160,7 +163,9 @@ namespace StupidMode.Common.Global
 
         public override void PreUpdateMovement()
         {
-            if (Main.myPlayer == Player.whoAmI) return;
+            if (Main.myPlayer != Player.whoAmI) return;
+            StupidPlayer modPlayer = Player.GetModPlayer<StupidPlayer>();
+
             if (taunting > 0)
             {
                 Player.direction = oldDirection;
@@ -172,6 +177,8 @@ namespace StupidMode.Common.Global
                 velBeforeTaunting = null;
             }
             oldDirection = Player.direction;
+
+            modPlayer.SendClientChanges(modPlayer);
         }
 
         public override bool CanUseItem(Item item)

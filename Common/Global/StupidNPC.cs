@@ -2,6 +2,7 @@
 using StupidMode.Common.System.Util;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace StupidMode.Common.Global
 {
@@ -99,10 +101,13 @@ namespace StupidMode.Common.Global
             SpecialLoot(npc);
             StupidNPC modNPC = npc.GetGlobalNPC<StupidNPC>();
             if (CanSplit(npc))
+            {
+                NPC baby;
                 for (int i = 0; i < 2; i++)
                 {
-                    Main.npc[NewChild(npc.GetSource_Death(), (int)npc.position.X + Main.rand.Next(-1, 1), (int)npc.position.Y, npc.type)].netUpdate = true; ;
+                    NewChild(npc.GetSource_Death(), (int)npc.position.X + Main.rand.Next(-1, 1), (int)npc.position.Y, npc.type);
                 }
+            }
 
             if (modNPC.dropMeteorite)
             {
@@ -714,6 +719,7 @@ namespace StupidMode.Common.Global
             newNPC.scale *= 0.8f;
             newNPC.value = 0;
             newNPC.GivenName = "Baby " + newNPC.GivenOrTypeName;
+            newNPC.netUpdate = true;
             return index;
         }
 
@@ -840,6 +846,28 @@ namespace StupidMode.Common.Global
 
             if (closestNPC == null) return null;
             return closestNPC.whoAmI;
+        }
+
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+        {
+            StupidNPC modNPC = npc.GetGlobalNPC<StupidNPC>();
+            if (modNPC.child) bitWriter.WriteBit(true);
+            else bitWriter.WriteBit(false);
+            binaryWriter.Write7BitEncodedInt(npc.life);
+            binaryWriter.Write7BitEncodedInt(npc.lifeMax);
+            binaryWriter.Write7BitEncodedInt((int)(npc.scale*100));
+        }
+
+        // Retrieve data in the same order that it is sent!
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            if (bitReader.ReadBit())
+            {
+                npc.GivenName = "Baby " + npc.TypeName;
+            }
+            npc.life = binaryReader.Read7BitEncodedInt();
+            npc.lifeMax = binaryReader.Read7BitEncodedInt();
+            npc.scale = (float)binaryReader.Read7BitEncodedInt()/100;
         }
     }
 }
