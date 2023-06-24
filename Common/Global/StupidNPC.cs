@@ -101,7 +101,7 @@ namespace StupidMode.Common.Global
             if (CanSplit(npc))
                 for (int i = 0; i < 2; i++)
                 {
-                    NewChild(npc.GetSource_Death(), (int)npc.position.X + Main.rand.Next(-1, 1), (int)npc.position.Y, npc.type);
+                    Main.npc[NewChild(npc.GetSource_Death(), (int)npc.position.X + Main.rand.Next(-1, 1), (int)npc.position.Y, npc.type)].netUpdate = true; ;
                 }
 
             if (modNPC.dropMeteorite)
@@ -444,7 +444,12 @@ namespace StupidMode.Common.Global
             {
                 if (NPC.FindFirstNPC(NPCID.Creeper) == -1 && modNPC.TryTrigger("enteredPhaseTwo"))
                 {
-                    NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X, (int)npc.Center.Y, NPCID.NebulaBrain);
+                    int[] npcs = SummonEnemySwarm(npc.GetSource_FromAI(), NPCID.NebulaBrain, 15, npc.Center);
+                    foreach (int i in npcs)
+                    {
+                        Main.npc[i].life = 1;
+                        Main.npc[i].defense = 999;
+                    }
                 }
             }
 
@@ -768,11 +773,12 @@ namespace StupidMode.Common.Global
             }
         }
 
-        public void SummonEnemySwarm(IEntitySource source, int type, int size, Vector2 pos)
+        public int[] SummonEnemySwarm(IEntitySource source, int type, int size, Vector2 pos)
         {
             Vector2 newPos;
             Vector2 tilePos;
             int shiftDirection;
+            int[] npcs = new int[size];
             bool hasTile;
             for (int i = 0; i < size; i++)
             {
@@ -798,9 +804,10 @@ namespace StupidMode.Common.Global
                 newPos = tilePos.ToWorldCoordinates();
                 if (!hasTile)
                 {
-                    NPC.NewNPC(source, (int)newPos.X, (int)newPos.Y, type);
+                    npcs[i] = NPC.NewNPC(source, (int)newPos.X, (int)newPos.Y, type);
                 }
             }
+            return npcs;
         }
         
         public static int? FindClosestNPC(Vector2 position, bool includeFriendly, bool includeNotFriendly, bool includeCreatures, bool includeInvulnerable, NPC type = null, int? maximumDistance = null)

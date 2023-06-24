@@ -8,6 +8,11 @@ Buffs: {
 		DisplayName: Overconfident
 		Description: Taunts will not parry
 	}
+
+	ShadowState: {
+		DisplayName: Shadow State
+		Description: Mods.StupidMode.Buffs.ShadowState.Description
+	}
 }
 
 Projectiles: {
@@ -42,8 +47,15 @@ Items: {
 	}
 
 	ShadowHeart: {
-		DisplayName: Corrupted Heart
-		Tooltip: Prevents Cursed Inferno from being caused by taking damage in the Corruption
+		DisplayName: Shadow Heart
+		Tooltip:
+			'''
+			Protects the user from a fatal blow
+			Once triggered, the user will enter a shadow state
+			In this shadow state, they will not be protected and will die the moment they take any amount of damage
+			The shadow state will only run out once the user regenerates all of their health
+			Prevents Cursed Inferno from being caused by taking damage in the Corruption
+			'''
 	}
 
 	Mimicifier: {

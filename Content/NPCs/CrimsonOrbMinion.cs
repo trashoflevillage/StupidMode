@@ -51,7 +51,7 @@ namespace StupidMode.Content.NPCs
 			if (!Main.player[(int)AI_Owner].dead)
 			{
 				int r = 125;
-				NPC.position.X = (r * (float)Math.Cos(Angle) + Main.player[(int)AI_Owner].Center.X) - NPC.width / 2;
+				NPC.position.X = r * (float)Math.Cos(Angle) + Main.player[(int)AI_Owner].Center.X - NPC.width / 2;
 				NPC.position.Y = r * (float)Math.Sin(Angle) + Main.player[(int)AI_Owner].Center.Y;
 				Angle += 0.02f;
 

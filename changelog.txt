@@ -9,6 +9,9 @@
 + Some bosses now have Stupid Mode exclusive drops.
  -> Ninja Slice (King Slime)
  -> Cthulhu's Lucky Boulder Charm (Eye Of Cthulhu)
+ -> Crimson Orb (Brain Of Cthulhu)
+ -> Shadow Heart (Eater Of Worlds)
+ -> Thulecite Crown (Deerclops)
 / The Eater of Worlds no longer destroys platforms, and instead summons swarms of Eater of Souls.
 + The Twins have been changed.
 + All naturally generated chests are now mimics.

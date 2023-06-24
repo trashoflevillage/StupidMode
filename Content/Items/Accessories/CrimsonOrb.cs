@@ -23,7 +23,7 @@ namespace StupidMode.Content.Items.Accessories
             player.GetModPlayer<StupidPlayer>().crimsonOrb = true;
             StupidPlayer modPlayer = player.GetModPlayer<StupidPlayer>();
 
-            if (!modPlayer.hasCrimsonOrbMinion && !player.dead)
+            if (!modPlayer.hasCrimsonOrbMinion && !player.dead && Main.myPlayer == player.whoAmI)
             {
                 modPlayer.hasCrimsonOrbMinion = true;
                 SoundEngine.PlaySound(SoundID.Item2, player.position);
