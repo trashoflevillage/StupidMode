@@ -19,6 +19,7 @@ namespace StupidMode.Content.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
 			player.GetModPlayer<StupidPlayer>().boulderCharm = true;
+			player.AddBuff(BuffID.Spelunker, 1);
         }
     }
 }

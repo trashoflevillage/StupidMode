@@ -23,6 +23,7 @@ namespace StupidMode.Common.Global
         public bool crimsonOrb = false;
         public bool hasCrimsonOrbMinion = false;
         public bool shadowHeart = false;
+        public bool thuleciteCrown = false;
         public int taunting = 0;
         public int oldDirection = 0;
         Vector2? velBeforeTaunting;
@@ -111,6 +112,7 @@ namespace StupidMode.Common.Global
             modPlayer.ninjaSlice = false;
             modPlayer.crimsonOrb = false;
             modPlayer.shadowHeart = false;
+            modPlayer.thuleciteCrown = false;
         }
 
         public override void PostUpdateEquips()
@@ -189,11 +191,14 @@ namespace StupidMode.Common.Global
 
         public override bool FreeDodge(Player.HurtInfo info)
         {
+            StupidPlayer modPlayer = Player.GetModPlayer<StupidPlayer>();
+
             if (taunting > 0 && !Player.HasBuff(ModContent.BuffType<Content.Buffs.Overconfident>()) && Main.myPlayer == Player.whoAmI)
             {
                 TauntParry(info);
                 return true;
             }
+
             if (shadowHeart && !Player.HasBuff(ModContent.BuffType<Content.Buffs.ShadowState>()) && Player.statLife - info.Damage <= 0 && Main.myPlayer == Player.whoAmI)
             {
                 Player.AddBuff(ModContent.BuffType<Content.Buffs.ShadowState>(), 1);
@@ -201,6 +206,11 @@ namespace StupidMode.Common.Global
                 Player.immuneNoBlink = true;
                 Player.statLife = 1;
                 SoundEngine.PlaySound(SoundID.NPCHit54, Player.position);
+                return true;
+            }
+
+            if (modPlayer.thuleciteCrown && info.Damage <= 10)
+            {
                 return true;
             }
             return base.FreeDodge(info);

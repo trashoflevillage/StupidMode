@@ -10,8 +10,8 @@ Buffs: {
 	}
 
 	ShadowState: {
-		DisplayName: Shadow State
-		Description: Mods.StupidMode.Buffs.ShadowState.Description
+		DisplayName: One With The Shadows
+		Description: You will die in one hit
 	}
 }
 
@@ -24,7 +24,11 @@ Projectiles: {
 Items: {
 	BoulderCharm: {
 		DisplayName: Cthulhu's Lucky Boulder Charm
-		Tooltip: Boulders cannot deal more than half of the wearer's maximum health
+		Tooltip:
+			'''
+			Boulders cannot deal more than half of the wearer's maximum health
+			Effects of spelunker potion
+			'''
 	}
 
 	NinjaSlice: {
@@ -64,6 +68,16 @@ Items: {
 			'''
 			You should not have this item
 			Used for developer testing and triggering mimic traps
+			'''
+	}
+
+	ThuleciteCrown: {
+		DisplayName: Thulecite Crown
+		Tooltip:
+			'''
+			4 defense
+			Completely negates all attacks that deal 10 or less damage
+			"Is hat for king."
 			'''
 	}
 }

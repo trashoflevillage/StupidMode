@@ -760,6 +760,7 @@ namespace StupidMode.Common.Global
                 case NPCID.KingSlime: dropItem = ModContent.ItemType<Content.Items.Accessories.NinjaSlice>(); break;
                 case NPCID.EyeofCthulhu: dropItem = ModContent.ItemType<Content.Items.Accessories.BoulderCharm>(); break;
                 case NPCID.BrainofCthulhu: dropItem = ModContent.ItemType<Content.Items.Accessories.CrimsonOrb>(); break;
+                case NPCID.Deerclops: dropItem = ModContent.ItemType<Content.Items.Accessories.ThuleciteCrown>(); break;
             }
 
             StupidNPC modNPC = npc.GetGlobalNPC<StupidNPC>();
