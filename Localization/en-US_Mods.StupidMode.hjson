@@ -19,6 +19,7 @@ Projectiles: {
 	Bloodbolt.DisplayName: Bloodbolt
 	MeanBeenade.DisplayName: Beenade
 	Bloodbeam.DisplayName: Bloodbeam
+	FriendlyCursedSkull.DisplayName: Friendly Cursed Skull
 }
 
 Items: {
@@ -78,6 +79,40 @@ Items: {
 			4 defense
 			Completely negates all attacks that deal 10 or less damage
 			"Is hat for king."
+			'''
+	}
+
+	BeeShield: {
+		DisplayName: Honey Shield
+		Tooltip:
+			'''
+			Allows the ability to dash
+			Double tap a direction
+			Dashing will spawn friendly bees to attack enemies
+			'''
+	}
+
+	CursedBrick: {
+		DisplayName: Archaic Runestone
+		Tooltip: Attacking an enemy has a chance to summon a cursed skull that will assist you
+	}
+
+	FleshyMass: {
+		DisplayName: Fleshy Mass
+		Tooltip:
+			'''
+			Respawn with full life
+			Immunity to Misguided
+			Did you expect something more?
+			'''
+	}
+
+	SuperAccessoryPrehardmode: {
+		DisplayName: Super Accessory Prehardmode
+		Tooltip:
+			'''
+			Effects of all pre-hardmode boss stupid accessories
+			+4 defense
 			'''
 	}
 }

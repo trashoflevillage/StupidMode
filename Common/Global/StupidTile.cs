@@ -97,7 +97,11 @@ namespace StupidMode.Common.Global
                             if (chest.item[inventoryIndex].type == ModContent.ItemType<Mimicifier>())
                             {
                                 int mimic = NPC.NewNPC(new EntitySource_TileInteraction(Main.player[0], i, j), chest.x * 16, chest.y * 16, NPCID.Mimic);
-                                StupidNPC modNPC = Main.npc[mimic].GetGlobalNPC<StupidNPC>();
+                                NPC npc = Main.npc[mimic];
+                                npc.defense = 0;
+                                npc.life = 500;
+                                npc.lifeMax = 500;
+                                StupidNPC modNPC = npc.GetGlobalNPC<StupidNPC>();
                                 modNPC.mimicTrap = true;
                                 modNPC.additionalLoot = new Item[chest.item.Length];
                                 for (int inventoryIndexB = 0; inventoryIndexB < 40; inventoryIndexB++)

@@ -327,7 +327,7 @@ namespace StupidMode.Common.Global
                 }
             }
 
-            if (cooldowns.ContainsKey("bouncyBoulderThrow"))
+            /*if (cooldowns.ContainsKey("bouncyBoulderThrow"))
             {
                 if (npc.life <= npc.lifeMax * 0.4)
                 {
@@ -423,7 +423,7 @@ namespace StupidMode.Common.Global
                         }
                     }
                 }
-            }
+            }*/
 
             if (cooldowns.ContainsKey("waterbolt"))
             {
@@ -561,7 +561,7 @@ namespace StupidMode.Common.Global
                         ProjectileID.Boulder, 200, 5f);
                 }
             }
-
+/*
             if (npc.type == NPCID.TheDestroyer)
             {
                 // Make the destroyer's probes upgrade with each incrementation of health.
@@ -579,7 +579,7 @@ namespace StupidMode.Common.Global
                 {
 
                 }
-            }
+            }*/
         }
         
         /// <summary>
@@ -761,6 +761,8 @@ namespace StupidMode.Common.Global
                 case NPCID.EyeofCthulhu: dropItem = ModContent.ItemType<Content.Items.Accessories.BoulderCharm>(); break;
                 case NPCID.BrainofCthulhu: dropItem = ModContent.ItemType<Content.Items.Accessories.CrimsonOrb>(); break;
                 case NPCID.Deerclops: dropItem = ModContent.ItemType<Content.Items.Accessories.ThuleciteCrown>(); break;
+                case NPCID.QueenBee: dropItem = ModContent.ItemType<Content.Items.Accessories.BeeShield>(); break;
+                case NPCID.SkeletronHead: dropItem = ModContent.ItemType<Content.Items.Accessories.CursedBrick>(); break;
             }
 
             StupidNPC modNPC = npc.GetGlobalNPC<StupidNPC>();

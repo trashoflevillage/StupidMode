@@ -13,4 +13,4 @@ As of current, Stupid Mode adds various changes, both in boss fights and outside
 
 ~ Moon Lord (I added something to the fight, although the mod does not cover all content up to this point.)
 
-This mod has not been tested for multiplayer, and does not actively support other mods. Although, code for multiplayer compatibility is in the mod.
+This mod is NOT compatible with multiplayer as of yet.

@@ -24,6 +24,8 @@ namespace StupidMode.Common.Global
         public bool hasCrimsonOrbMinion = false;
         public bool shadowHeart = false;
         public bool thuleciteCrown = false;
+        public bool cursedBrick = false;
+        public bool fleshyMass = false;
         public int taunting = 0;
         public int oldDirection = 0;
         Vector2? velBeforeTaunting;
@@ -113,6 +115,8 @@ namespace StupidMode.Common.Global
             modPlayer.crimsonOrb = false;
             modPlayer.shadowHeart = false;
             modPlayer.thuleciteCrown = false;
+            modPlayer.cursedBrick = false;
+            modPlayer.fleshyMass = false;
         }
 
         public override void PostUpdateEquips()
@@ -259,5 +263,26 @@ namespace StupidMode.Common.Global
             }
         }
 
+        public override void OnHitAnything(float x, float y, Entity victim)
+        {
+            StupidPlayer modPlayer = Player.GetModPlayer<StupidPlayer>();
+            if (modPlayer.cursedBrick && Main.rand.Next(1, 20) == 1)
+            {
+                int multX = 1;
+                int multY = 1;
+                if (Main.rand.NextBool()) multX *= -1;
+                if (Main.rand.NextBool()) multY *= -1;
+                Vector2 spawnPos = victim.Center + new Vector2(Main.rand.NextFloat(25f, 50f) * multX, Main.rand.NextFloat(-50f, 50f) * multY);
+                Projectile.NewProjectile(Player.GetSource_FromAI(), spawnPos, spawnPos.DirectionTo(victim.Center), ModContent.ProjectileType<Content.Projectiles.FriendlyCursedSkull>(),
+                    20, 0f, Player.whoAmI);
+            }
+        }
+
+        public override void OnRespawn()
+        {
+            StupidPlayer modPlayer = Player.GetModPlayer<StupidPlayer>();
+            if (modPlayer.fleshyMass)
+                Player.statLife = Player.statLifeMax2;
+        }
     }
 }

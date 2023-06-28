@@ -12,6 +12,7 @@
  -> Crimson Orb (Brain Of Cthulhu)
  -> Shadow Heart (Eater Of Worlds)
  -> Thulecite Crown (Deerclops)
+ -> Archaic Runestone (Skeletron)
+ -> Fleshy Mass (Wall of Flesh)
 / The Eater of Worlds no longer destroys platforms, and instead summons swarms of Eater of Souls.
-+ The Twins have been changed.
 + All naturally generated chests are now mimics.

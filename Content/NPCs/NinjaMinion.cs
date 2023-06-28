@@ -119,7 +119,7 @@ namespace StupidMode.Content.NPCs
 
 				foreach (Vector2 v in velocities)
 				{
-					StupidNPC.NewHostileProjectile(NPC.GetSource_FromAI(), NPC.position, v * 10, ProjectileID.Shuriken, 5, 0);
+					StupidNPC.NewHostileProjectile(NPC.GetSource_FromAI(), NPC.position, v * 10, ProjectileID.Shuriken, 50, 0);
 				}
 			}
 			SoundEngine.PlaySound(new SoundStyle("StupidMode/Assets/Sounds/taunt"), NPC.position);
