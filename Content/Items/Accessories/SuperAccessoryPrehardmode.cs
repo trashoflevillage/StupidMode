@@ -66,7 +66,8 @@ namespace StupidMode.Content.Items.Accessories
                 .AddIngredient(ModContent.ItemType<ThuleciteCrown>())
                 .AddIngredient(ModContent.ItemType<BeeShield>())
                 .AddIngredient(ModContent.ItemType<CursedBrick>())
-                .AddIngredient(ModContent.ItemType<FleshyMass>());
+                .AddIngredient(ModContent.ItemType<FleshyMass>())
+                .Register();
         }
     }
 }
