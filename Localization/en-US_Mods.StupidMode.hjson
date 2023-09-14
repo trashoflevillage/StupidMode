@@ -121,6 +121,40 @@ NPCs: {
 	FlyingSkull.DisplayName: Flying Skull
 	NinjaMinion.DisplayName: Ninja
 	CrimsonOrbMinion.DisplayName: Crimson Orb Minion
+
+	Niko: {
+		DisplayName: Messiah
+
+		TownNPCMood: {
+			Content: This place is warm and cozy.
+			NoHome: Is there anywhere safe to stay around here?
+			FarFromHome: I miss my mom...
+			LoveSpace: So much room to myself!
+			DislikeCrowded: Can I have some privacy, please?
+			HateCrowded: I hate how crowded I am.
+			LikeBiome: I like {BiomeName}.
+			DislikeBiome: I dislike {BiomeName}.
+			LoveNPC: I love {NPCName}.
+			LikeNPC: I like {NPCName}.
+			DislikeNPC: I dislike {NPCName}.
+			HateNPC: I hate {NPCName}.
+			LikeNPC_Princess: I like {NPCName}.
+			Princess_LovesNPC: I like {NPCName}.
+		}
+
+		Census.SpawnCondition: Needs a home
+	}
+}
+
+Bestiary.Niko: A bright-eyed child with a curious heart, Niko was summoned here to offer his overly-optimistic advise. He does not belong here. Help him escape.
+
+Dialogue: {
+	Niko: {
+		StandardDialogue1: Does this world need a new sun too?
+		StandardDialogue2: Please be careful around me! This sun is very delicate!
+		StandardDialogue3: Do you also hear voices?
+		TalkALot: Wow, you talk to me a lot! You must think of me as a friend!
+	}
 }
 
 Keybinds.TauntKeybind.DisplayName: Taunt
