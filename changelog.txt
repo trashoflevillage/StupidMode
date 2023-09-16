@@ -16,3 +16,5 @@
  -> Fleshy Mass (Wall of Flesh)
 / The Eater of Worlds no longer destroys platforms, and instead summons swarms of Eater of Souls.
 + All naturally generated chests are now mimics.
++ Niko
++ New boss music! It's not mine, all of it is credited in the mod description.

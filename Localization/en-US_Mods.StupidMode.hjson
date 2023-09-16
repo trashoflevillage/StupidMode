@@ -150,6 +150,7 @@ Bestiary.Niko: A bright-eyed child with a curious heart, Niko was summoned here 
 
 Dialogue: {
 	Niko: {
+		CommonDialogue: Hello! I'm Niko! What's your name?
 		StandardDialogue1: Does this world need a new sun too?
 		StandardDialogue2: Please be careful around me! This sun is very delicate!
 		StandardDialogue3: Do you also hear voices?

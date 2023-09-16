@@ -124,6 +124,22 @@ namespace StupidMode.Common.Global
                     NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.position.X, (int)npc.position.Y, NPCID.DarkCaster);
                     NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.position.X, (int)npc.position.Y, NPCID.AngryBonesBigMuscle);
                 }
+
+                List<NPC> npcs = new List<NPC>();
+                foreach (NPC i in Main.npc) {
+                    if (i.type == NPCID.SkeletronHand && i.active) {
+                        npcs.Add(i);
+                    }
+                }
+
+                foreach (NPC i in npcs)
+                {
+                    i.life = Main.npc[NPC.FindFirstNPC(NPCID.SkeletronHand)].lifeMax *= 2;
+                    i.life = Main.npc[NPC.FindFirstNPC(NPCID.SkeletronHand)].lifeMax;
+                    i.scale *= 2;
+                    i.height *= 2;
+                    i.width *= 2;
+                }
             }
 
             if (npc.type == NPCID.EaterofWorldsBody || npc.type == NPCID.EaterofWorldsHead || npc.type == NPCID.EaterofWorldsTail)
