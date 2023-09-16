@@ -15,6 +15,8 @@ As of current, Stupid Mode adds various changes, both in boss fights and outside
 
 This mod is NOT compatible with multiplayer as of yet.
 
+I do NOT own all assets used in this mod. Assets that have been borrowed are credited below.
+
 
 
 
@@ -23,3 +25,13 @@ This mod is NOT compatible with multiplayer as of yet.
 Music Used:
 Ultimate Battle - Plants vs Zombies
 Chaos King - Deltarune
+Bee Queen's Theme - Don't Starve Together.
+
+Sounds Used:
+Taunt - Pizza Tower
+
+Characters Used:
+Niko - OneShot
+
+Sprites Used:
+Niko - OneShot

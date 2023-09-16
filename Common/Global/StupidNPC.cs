@@ -12,6 +12,7 @@ using Terraria.Chat;
 using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -25,6 +26,7 @@ namespace StupidMode.Common.Global
         public bool dropMeteorite;
         public bool mimicTrap;
         public bool noLoot;
+        public BossMusic bossMusic;
 
         public Item[]? additionalLoot = null;
 
@@ -33,8 +35,10 @@ namespace StupidMode.Common.Global
         public IDictionary<string, Cooldown> cooldowns = new Dictionary<string, Cooldown>();
         public IDictionary<string, bool> triggers = new Dictionary<string, bool>();
 
+
         public override void SetDefaults(NPC npc)
         {
+            StupidNPC modNPC = npc.GetGlobalNPC<StupidNPC>();
             if (!npc.friendly)
             {
                 if (!npc.boss)
@@ -70,6 +74,8 @@ namespace StupidMode.Common.Global
                 npc.dontTakeDamage = true;
             }
 
+            modNPC.bossMusic = GetBossMusic(npc.type);
+
             // Initialize boss ability cooldowns
             {
                 NewCooldown(npc, NPCID.EyeofCthulhu, "boulderThrowActivate", 420);
@@ -93,6 +99,33 @@ namespace StupidMode.Common.Global
 
                 NewCooldown(npc, NPCID.Retinazer, "laserRingActivate", 340);
                 NewCooldown(npc, NPCID.Retinazer, "laserRing", 180, true, -1);
+            }
+        }
+
+        public override void OnSpawn(NPC npc, IEntitySource source)
+        {
+            StupidNPC modNPC = npc.GetGlobalNPC<StupidNPC>();
+
+            if (modNPC.bossMusic != BossMusic.None)
+            {
+                StupidNPC compare;
+
+                bool sendCredits = true;
+
+                foreach (NPC n in Main.npc)
+                {
+                    if (n.active && n.TryGetGlobalNPC(out compare))
+                    {
+                        compare = n.GetGlobalNPC<StupidNPC>();
+                        if (npc.whoAmI != n.whoAmI && modNPC.bossMusic == compare.bossMusic)
+                        {
+                            sendCredits = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (sendCredits) SendBossMusicCredits(modNPC.bossMusic);
             }
         }
 
@@ -888,5 +921,48 @@ namespace StupidMode.Common.Global
             npc.lifeMax = binaryReader.Read7BitEncodedInt();
             npc.scale = (float)binaryReader.Read7BitEncodedInt()/100;
         }
+
+        private static BossMusic GetBossMusic(int type)
+        {
+            switch (type)
+            {
+                case NPCID.KingSlime: return BossMusic.UltimateBattle;
+                case NPCID.EyeofCthulhu: return BossMusic.UltimateBattle;
+                case NPCID.SkeletronHead: return BossMusic.UltimateBattle;
+                case NPCID.EaterofWorldsHead: return BossMusic.UltimateBattle;
+                case NPCID.SkeletronPrime: return BossMusic.UltimateBattle;
+
+                case NPCID.WallofFlesh: return BossMusic.ChaosKing;
+                case NPCID.WallofFleshEye: return BossMusic.ChaosKing;
+
+                case NPCID.QueenBee: return BossMusic.DSTBeeQueen;
+                    
+                default: return BossMusic.None;
+            }
+        }
+
+        private static void SendBossMusicCredits(BossMusic music) {
+            if (music == BossMusic.None) return;
+
+            string author = "";
+            string source = "";
+            string songName = "";
+
+            switch (music)
+            {
+                case BossMusic.UltimateBattle: songName = "Ultimate Battle"; author = "Laura Shigihara"; source = "Plants Vs. Zombies"; break;
+                case BossMusic.ChaosKing: songName = "Chaos King"; author = "Toby Fox"; source = "Deltarune"; break;
+                case BossMusic.DSTBeeQueen: songName = "Bee Queen's Theme"; author = "Klei Entertainment"; source = "Don't Starve Together"; break;
+            }
+
+            ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("Now Playing: " + songName + " by " + author + " from " + source + "."), new Color(25, 217, 234));
+        }
+    }
+
+    public enum BossMusic {
+        None = -1,
+        UltimateBattle = 0,
+        ChaosKing = 1,
+        DSTBeeQueen = 2
     }
 }
