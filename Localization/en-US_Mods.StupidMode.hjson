@@ -20,6 +20,7 @@ Projectiles: {
 	MeanBeenade.DisplayName: Beenade
 	Bloodbeam.DisplayName: Bloodbeam
 	FriendlyCursedSkull.DisplayName: Friendly Cursed Skull
+	ZombieHead.DisplayName: Zombie Head
 }
 
 Items: {
@@ -124,13 +125,14 @@ NPCs: {
 
 	Niko: {
 		DisplayName: Messiah
+		Census.SpawnCondition: Needs a home
 
 		TownNPCMood: {
-			Content: This place is warm and cozy.
-			NoHome: Is there anywhere safe to stay around here?
-			FarFromHome: I miss my mom...
-			LoveSpace: So much room to myself!
-			DislikeCrowded: Can I have some privacy, please?
+			Content: I am content.
+			NoHome: I hate not having a home.
+			FarFromHome: I am too far from home.
+			LoveSpace: I love having so much space.
+			DislikeCrowded: I dislike how crowded I am.
 			HateCrowded: I hate how crowded I am.
 			LikeBiome: I like {BiomeName}.
 			DislikeBiome: I dislike {BiomeName}.
@@ -141,9 +143,9 @@ NPCs: {
 			LikeNPC_Princess: I like {NPCName}.
 			Princess_LovesNPC: I like {NPCName}.
 		}
-
-		Census.SpawnCondition: Needs a home
 	}
+
+	WOFHolo.DisplayName: Wallogram
 }
 
 Bestiary.Niko: A bright-eyed child with a curious heart, Niko was summoned here to offer his overly-optimistic advise. He does not belong here. Help him escape.

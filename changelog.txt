@@ -18,3 +18,4 @@
 + All naturally generated chests are now mimics.
 + Niko
 + New boss music! It's not mine, all of it is credited in the mod description.
+/ Wall of Flesh has been (mostly) reworked

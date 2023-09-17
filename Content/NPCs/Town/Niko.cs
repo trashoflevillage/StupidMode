@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using ReLogic.Content;
 using Terraria.GameContent.UI;
 using Terraria.ModLoader.IO;
+using StupidMode.Common.Global;
 
 namespace StupidMode.Content.NPCs.Town
 {
@@ -23,7 +24,8 @@ namespace StupidMode.Content.NPCs.Town
 	[AutoloadHead]
 	public class Niko : ModNPC
 	{
-		public const string ShopName = "Shop";
+		public static short bossHelp = 0;
+
 		public int NumberOfTimesTalkedTo = 0;
 
 		private static int ShimmerHeadIndex;
@@ -162,38 +164,36 @@ namespace StupidMode.Content.NPCs.Town
 		}
 
 		public override void SetChatButtons(ref string button, ref string button2)
-		{ // What the chat buttons are when you open up the chat UI
-/*			button = Language.GetTextValue("LegacyInterface.28");
-			button2 = "Awesomeify";
-			if (Main.LocalPlayer.HasItem(ItemID.HiveBackpack))
-			{
-				button = "Upgrade " + Lang.GetItemNameValue(ItemID.HiveBackpack);
-			}*/
+		{
+			button = "Guidance (" + NPC.GetFullnameByID(StupidNPC.bosses.Keys.ToArray()[bossHelp]) + ")";
+			button2 = "Cycle";
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref string shop)
 		{
-			/*if (firstButton)
+			if (firstButton)
 			{
-				// We want 3 different functionalities for chat buttons, so we use HasItem to change button 1 between a shop and upgrade action.
+				Main.npcChatText = getBossHelp(StupidNPC.bosses.Keys.ToArray()[bossHelp]);
+			}
+			else
+			{
+				bossHelp = (short)((bossHelp + 1) % StupidNPC.bosses.Count);
+			}
+		}
 
-				if (Main.LocalPlayer.HasItem(ItemID.HiveBackpack))
-				{
-					SoundEngine.PlaySound(SoundID.Item37); // Reforge/Anvil sound
-
-					Main.npcChatText = $"I upgraded your {Lang.GetItemNameValue(ItemID.HiveBackpack)} to a {Lang.GetItemNameValue(ModContent.ItemType<WaspNest>())}";
-
-					int hiveBackpackItemIndex = Main.LocalPlayer.FindItem(ItemID.HiveBackpack);
-					var entitySource = NPC.GetSource_GiftOrReward();
-
-					Main.LocalPlayer.inventory[hiveBackpackItemIndex].TurnToAir();
-					Main.LocalPlayer.QuickSpawnItem(entitySource, ModContent.ItemType<WaspNest>());
-
-					return;
-				}
-
-				shop = ShopName; // Name of the shop tab we want to open.
-			}*/
+		private string getBossHelp(short boss) {
+			if (!StupidNPC.bosses[boss])
+            {
+				return "Sorry, I haven't seen you fight that boss yet. Maybe get some experience with it before asking me for help!";
+			} else
+            {
+				switch(boss)
+                {
+					default: return "Hmm... I'm stumped on this one. Looks like you're all on your own!";
+					case NPCID.EyeofCthulhu: return "The eye seems to really rely on those nasty boulders. " +
+                            "Avoid being under servants, and try hiding under the big guy when he does his boulder explosion! He doesn't shoot them below himself!";
+                }
+            }
 		}
 
 /*		public override void AddShops()

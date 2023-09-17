@@ -22,6 +22,17 @@ namespace StupidMode.Common.Global
     {
         public override bool InstancePerEntity => true;
 
+        public static IDictionary<short, bool> bosses = new Dictionary<short, bool> {
+            { NPCID.KingSlime, false },
+            { NPCID.EyeofCthulhu, false },
+            { NPCID.EaterofWorldsHead, false },
+            { NPCID.BrainofCthulhu, false },
+            { NPCID.Deerclops, false },
+            { NPCID.QueenBee, false },
+            { NPCID.SkeletronHead, false },
+            { NPCID.WallofFlesh, false },
+        };
+
         public bool child;
         public bool dropMeteorite;
         public bool mimicTrap;
@@ -67,11 +78,6 @@ namespace StupidMode.Common.Global
             if (npc.type == NPCID.MoonLordCore)
             {
                 npc.damage = 80;
-            }
-
-            if (npc.type == NPCID.WallofFleshEye)
-            {
-                npc.dontTakeDamage = true;
             }
 
             modNPC.bossMusic = GetBossMusic(npc.type);
@@ -127,6 +133,16 @@ namespace StupidMode.Common.Global
 
                 if (sendCredits) SendBossMusicCredits(modNPC.bossMusic);
             }
+
+            if (npc.type == NPCID.WallofFlesh)
+            {
+                NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.position.X, (int)npc.position.Y, ModContent.NPCType<Content.NPCs.Boss.WOFHolo>());
+            }
+
+            if (bosses.ContainsKey((short)npc.type) && !bosses[(short)npc.type])
+            {
+                bosses[(short)npc.type] = true;
+            }
         }
 
         public override void OnKill(NPC npc)
@@ -135,7 +151,6 @@ namespace StupidMode.Common.Global
             StupidNPC modNPC = npc.GetGlobalNPC<StupidNPC>();
             if (CanSplit(npc))
             {
-                NPC baby;
                 for (int i = 0; i < 2; i++)
                 {
                     NewChild(npc.GetSource_Death(), (int)npc.position.X + Main.rand.Next(-1, 1), (int)npc.position.Y, npc.type);
@@ -258,6 +273,19 @@ namespace StupidMode.Common.Global
                     npc.DropItemInstanced(npc.position, npc.Size, ModContent.ItemType<Content.Items.Accessories.ShadowHeart>(), 1, true);
                 }
             }
+
+/*            IDictionary<short, int> zombieHeads = new Dictionary<short, int>()
+            {
+                { NPCID.Zombie, 0 }
+            };
+
+            if (zombieHeads.ContainsKey((short)npc.type))
+            {
+                Vector2 pos = npc.position;
+                pos.X += npc.width / 2;
+                Projectile.NewProjectile(npc.GetSource_Death(), pos, new Vector2(0, -10), ModContent.ProjectileType<Content.Projectiles.ZombieHead>(), 3, 1,
+                    zombieHeads[(short)npc.type]);
+            }*/
         }
 
         public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
@@ -295,26 +323,7 @@ namespace StupidMode.Common.Global
             return base.PreKill(npc);
         }
 
-        public void OnHitByAnything(NPC npc, NPC.HitInfo hit, int damageDone)
-        {
-            if (npc.type == NPCID.WallofFlesh || npc.type == NPCID.WallofFleshEye)
-            {
-                int vulnerableType;
-                if (npc.type == NPCID.WallofFlesh)
-                {
-                    vulnerableType = NPCID.WallofFleshEye;
-                } else
-                {
-                    vulnerableType = NPCID.WallofFlesh;
-                }
-
-                foreach (NPC i in Main.npc)
-                {
-                    if (i.type == npc.type) i.dontTakeDamage = true;
-                    else if (i.type == vulnerableType) i.dontTakeDamage = false;
-                }
-            }
-        }
+        public void OnHitByAnything(NPC npc, NPC.HitInfo hit, int damageDone) { }
 
         public override void AI(NPC npc)
         {
@@ -772,7 +781,7 @@ namespace StupidMode.Common.Global
             return index;
         }
 
-        private static int GetBossValue()
+/*        private static int GetBossValue()
         {
             int val = 0;
             if (NPC.downedSlimeKing) val = 1;
@@ -792,7 +801,7 @@ namespace StupidMode.Common.Global
             return val;
         }
 
-        /*public override void ModifyActiveShop(NPC npc, string shopName, Item[] items)
+        public override void ModifyActiveShop(NPC npc, string shopName, Item[] items)
         {
             foreach (Item i in items)
             {
@@ -812,6 +821,7 @@ namespace StupidMode.Common.Global
                 case NPCID.Deerclops: dropItem = ModContent.ItemType<Content.Items.Accessories.ThuleciteCrown>(); break;
                 case NPCID.QueenBee: dropItem = ModContent.ItemType<Content.Items.Accessories.BeeShield>(); break;
                 case NPCID.SkeletronHead: dropItem = ModContent.ItemType<Content.Items.Accessories.CursedBrick>(); break;
+                case NPCID.WallofFlesh: dropItem = ModContent.ItemType<Content.Items.Accessories.FleshyMass>(); break;
             }
 
             StupidNPC modNPC = npc.GetGlobalNPC<StupidNPC>();
@@ -932,11 +942,15 @@ namespace StupidMode.Common.Global
                 case NPCID.EaterofWorldsHead: return BossMusic.UltimateBattle;
                 case NPCID.SkeletronPrime: return BossMusic.UltimateBattle;
 
+                case NPCID.BrainofCthulhu: return BossMusic.BrokenVessel;
+
                 case NPCID.WallofFlesh: return BossMusic.ChaosKing;
                 case NPCID.WallofFleshEye: return BossMusic.ChaosKing;
 
                 case NPCID.QueenBee: return BossMusic.DSTBeeQueen;
-                    
+
+                case NPCID.Deerclops: return BossMusic.WinterEFS;
+
                 default: return BossMusic.None;
             }
         }
@@ -953,6 +967,8 @@ namespace StupidMode.Common.Global
                 case BossMusic.UltimateBattle: songName = "Ultimate Battle"; author = "Laura Shigihara"; source = "Plants Vs. Zombies"; break;
                 case BossMusic.ChaosKing: songName = "Chaos King"; author = "Toby Fox"; source = "Deltarune"; break;
                 case BossMusic.DSTBeeQueen: songName = "Bee Queen's Theme"; author = "Klei Entertainment"; source = "Don't Starve Together"; break;
+                case BossMusic.WinterEFS: songName = "EFS of Winter"; author = "Klei Entertainment"; source = "Don't Starve"; break;
+                case BossMusic.BrokenVessel: songName = "Broken Vessel"; author = "Christopher Larkin"; source = "Hollow Knight"; break;
             }
 
             ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("Now Playing: " + songName + " by " + author + " from " + source + "."), new Color(25, 217, 234));
@@ -963,6 +979,8 @@ namespace StupidMode.Common.Global
         None = -1,
         UltimateBattle = 0,
         ChaosKing = 1,
-        DSTBeeQueen = 2
+        DSTBeeQueen = 2,
+        WinterEFS = 3,
+        BrokenVessel = 4
     }
 }

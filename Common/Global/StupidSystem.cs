@@ -17,6 +17,27 @@ namespace StupidMode.Common.Global
         {
             if (Main.netMode != NetmodeID.MultiplayerClient) 
                 Sandstorm.StartSandstorm();
-        }
-    }
+		}
+		public override void SaveWorldData(TagCompound tag)
+		{
+			foreach (KeyValuePair<short, bool> i in StupidNPC.bosses)
+            {
+				tag["summonedBoss_" + i.Key] = i.Value;
+            }
+		}
+
+		public override void LoadWorldData(TagCompound tag)
+		{
+			short[] bosses = StupidNPC.bosses.Keys.ToArray();
+			foreach (short i in bosses)
+            {
+				string asKey = "summonedBoss_" + i;
+				if (!tag.ContainsKey(asKey)) StupidNPC.bosses[i] = false;
+				else
+                {
+					StupidNPC.bosses[i] = tag.GetBool(asKey);
+                }
+            }
+		}
+	}
 }
