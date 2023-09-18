@@ -17,5 +17,7 @@
 / The Eater of Worlds no longer destroys platforms, and instead summons swarms of Eater of Souls.
 + All naturally generated chests are now mimics.
 + Niko
-+ New boss music! It's not mine, all of it is credited in the mod description.
+ -> You can ask Niko for help with bosses!... well, only King Slime and Eye of Cthulhu for the moment...
+ -> Can move in from the start.
++ New boss music! It's not mine, all of it is credited in the mod description along with when it plays.
 / Wall of Flesh has been (mostly) reworked

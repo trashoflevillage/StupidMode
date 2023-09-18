@@ -12,7 +12,16 @@ namespace StupidMode
 
         public override void Load()
         {
+            ReplaceTextures();
+
+            Terraria.On_NPC.NPCLoot_DropItems += On_NPC_NPCLoot_DropItems;
+        }
+
+        private void ReplaceTextures()
+        {
             TextureAssets.Ninja = ModContent.Request<Texture2D>("StupidMode/Assets/Textures/Empty", ReLogic.Content.AssetRequestMode.ImmediateLoad);
+
+            TextureAssets.Npc[658] = ModContent.Request<Texture2D>("StupidMode/Assets/Textures/NPCs/CatCrystalSlime", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 
             // Zombie head gores
             /*TextureAssets.Gore[3] = ModContent.Request<Texture2D>("StupidMode/Assets/Textures/Empty", ReLogic.Content.AssetRequestMode.ImmediateLoad);
@@ -30,8 +39,6 @@ namespace StupidMode
             TextureAssets.Gore[491] = ModContent.Request<Texture2D>("StupidMode/Assets/Textures/Empty", ReLogic.Content.AssetRequestMode.ImmediateLoad);
             TextureAssets.Gore[722] = ModContent.Request<Texture2D>("StupidMode/Assets/Textures/Empty", ReLogic.Content.AssetRequestMode.ImmediateLoad);
             TextureAssets.Gore[1214] = ModContent.Request<Texture2D>("StupidMode/Assets/Textures/Empty", ReLogic.Content.AssetRequestMode.ImmediateLoad);*/
-
-            Terraria.On_NPC.NPCLoot_DropItems += On_NPC_NPCLoot_DropItems;
         }
 
         private void On_NPC_NPCLoot_DropItems(Terraria.On_NPC.orig_NPCLoot_DropItems orig, Terraria.NPC self, Terraria.Player closestPlayer)

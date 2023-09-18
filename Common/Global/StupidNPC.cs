@@ -50,6 +50,12 @@ namespace StupidMode.Common.Global
         public override void SetDefaults(NPC npc)
         {
             StupidNPC modNPC = npc.GetGlobalNPC<StupidNPC>();
+
+            if (npc.type == NPCID.QueenSlimeMinionBlue)
+            {
+                npc.GivenName = "Catgirl Slime";
+            }
+
             if (!npc.friendly)
             {
                 if (!npc.boss)

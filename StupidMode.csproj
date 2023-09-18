@@ -8,6 +8,7 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\Textures\NPCs\CatCrystalSlime.png" />
     <None Remove="Content\NPCs\Boss\WOFHolo.png" />
     <None Remove="Content\NPCs\Town\Niko.png" />
     <None Remove="Content\NPCs\Town\Niko_Head.png" />
