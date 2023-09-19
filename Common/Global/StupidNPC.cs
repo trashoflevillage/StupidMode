@@ -51,9 +51,11 @@ namespace StupidMode.Common.Global
         {
             StupidNPC modNPC = npc.GetGlobalNPC<StupidNPC>();
 
-            if (npc.type == NPCID.QueenSlimeMinionBlue)
+            switch (npc.type)
             {
-                npc.GivenName = "Catgirl Slime";
+                default: break;
+                case NPCID.QueenSlimeMinionBlue: npc.GivenName = "Catgirl Slime"; break;
+                case NPCID.QueenSlimeMinionPurple: npc.GivenName = "Flying Boulder"; npc.lifeMax *= 3; npc.life = npc.lifeMax; break;
             }
 
             if (!npc.friendly)
@@ -169,6 +171,11 @@ namespace StupidMode.Common.Global
                 {
                     Item.NewItem(npc.GetSource_Death(), new Rectangle((int)npc.position.X, (int)npc.position.Y, 1, 1), ItemID.Meteorite, 1);
                 }
+            }
+
+            if (npc.type == NPCID.QueenSlimeMinionPurple)
+            {
+                Projectile.NewProjectile(npc.GetSource_Death(), npc.position, new Vector2(npc.velocity.X, 12), ProjectileID.BouncyBoulder, 200, 3);
             }
 
             if (npc.type == NPCID.SkeletronHand)

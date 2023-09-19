@@ -22,6 +22,7 @@ namespace StupidMode
             TextureAssets.Ninja = ModContent.Request<Texture2D>("StupidMode/Assets/Textures/Empty", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 
             TextureAssets.Npc[658] = ModContent.Request<Texture2D>("StupidMode/Assets/Textures/NPCs/CatCrystalSlime", ReLogic.Content.AssetRequestMode.ImmediateLoad);
+            TextureAssets.Npc[660] = ModContent.Request<Texture2D>("StupidMode/Assets/Textures/NPCs/FlyingBoulder", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 
             // Zombie head gores
             /*TextureAssets.Gore[3] = ModContent.Request<Texture2D>("StupidMode/Assets/Textures/Empty", ReLogic.Content.AssetRequestMode.ImmediateLoad);
