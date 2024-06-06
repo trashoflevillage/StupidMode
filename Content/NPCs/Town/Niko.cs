@@ -190,7 +190,7 @@ namespace StupidMode.Content.NPCs.Town
 				switch(boss)
                 {
 					default: return "Hmm... I'm stumped on this one. It looks like you're all on your own!\n(No guidance has been set yet. Sorry!)";
-					case NPCID.KingSlime: return "King Slime shoots out slime spikes at a very high velocity. However, these are not very hard to avoid if you just keep a good distance!" +
+					case NPCID.KingSlime: return "King Slime shoots out slime spikes at a very high velocity. However, these are not very hard to avoid if you just keep a good distance! " +
                             "The ninja also stays pretty close to the slimy monarch, so you're safe from him too!";
 					case NPCID.EyeofCthulhu: return "The eye seems to really rely on those nasty boulders. " +
                             "Avoid being under servants, and try hiding under the big guy when he does his boulder explosion! He doesn't shoot them below himself!";

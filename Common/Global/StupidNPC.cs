@@ -111,6 +111,8 @@ namespace StupidMode.Common.Global
                 NewCooldown(npc, NPCID.Spazmatism, "bouncyBoulderThrowActivate", 340, false);
                 NewCooldown(npc, NPCID.Spazmatism, "bouncyBoulderThrow", 180, false, -1);
 
+                //NewCooldown(npc, NPCID.QueenSlimeBoss, "meowStrike", 3600, true, 1800);
+
                 NewCooldown(npc, NPCID.Retinazer, "laserRingActivate", 340);
                 NewCooldown(npc, NPCID.Retinazer, "laserRing", 180, true, -1);
             }
@@ -632,7 +634,7 @@ namespace StupidMode.Common.Global
                         ProjectileID.Boulder, 200, 5f);
                 }
             }
-/*
+            /*
             if (npc.type == NPCID.TheDestroyer)
             {
                 // Make the destroyer's probes upgrade with each incrementation of health.
@@ -649,6 +651,16 @@ namespace StupidMode.Common.Global
                 if (npc.life <= npc.lifeMax - (npc.lifeMax / 3))
                 {
 
+                }
+            }*/
+
+            /*if (cooldowns.ContainsKey("meowStrike"))
+            {
+                if (cooldowns["meowStrike"].TickCooldown())
+                {
+                    ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.StupidMode.Notifications.Meowstrike"), new Color(50, 255, 130));
+                    SoundEngine.PlaySound(SoundID.Meowmere);
+                    cooldowns["meowStrike"].val = -1;
                 }
             }*/
         }

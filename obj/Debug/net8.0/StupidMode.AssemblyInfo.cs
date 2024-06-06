@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StupidMode")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0e3e39880796f9eec3e0b52741b8480652879457")]
 [assembly: System.Reflection.AssemblyProductAttribute("StupidMode")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StupidMode")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -11,12 +11,16 @@ namespace StupidMode.Common.System.Util
         public int maxVal;
         public int val = 0;
 
-        public Cooldown(int maxVal, int? defaultVal = null)
+        private int defaultVal;
+
+        public Cooldown(int maxVal, int? dv = null)
         {
-            if (defaultVal != null)
+            if (dv != null)
             {
-                val = defaultVal.Value;
+                val = dv.Value;
             }
+
+            defaultVal = val;
             this.maxVal = maxVal;
         }
         
@@ -34,6 +38,10 @@ namespace StupidMode.Common.System.Util
                 return true;
             }
             return false;
+        }
+
+        public void Reset() {
+            val = defaultVal;
         }
     }
 }

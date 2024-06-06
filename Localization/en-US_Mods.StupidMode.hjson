@@ -167,3 +167,5 @@ DropConditions: {
 	IsNotChild: Mods.StupidMode.DropConditions.IsNotChild
 	IsNotMimicTrap: Mods.StupidMode.DropConditions.IsNotMimicTrap
 }
+
+Notifications.Meowstrike: A meowstrike is incoming!
