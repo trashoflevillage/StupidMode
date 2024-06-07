@@ -1,0 +1,173 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|c:\\users\\uhhno\\documents\\my games\\terraria\\tmodloader\\modsources\\stupidmode\\common\\global\\stupidnpc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|solutionrelative:common\\global\\stupidnpc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|c:\\users\\uhhno\\documents\\my games\\terraria\\tmodloader\\modsources\\stupidmode\\common\\sceneeffects\\music\\attackofthekillerqueenmeowsynth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|solutionrelative:common\\sceneeffects\\music\\attackofthekillerqueenmeowsynth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|c:\\users\\uhhno\\documents\\my games\\terraria\\tmodloader\\modsources\\stupidmode\\common\\sceneeffects\\music\\brokenvessel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|solutionrelative:common\\sceneeffects\\music\\brokenvessel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|c:\\users\\uhhno\\documents\\my games\\terraria\\tmodloader\\modsources\\stupidmode\\common\\global\\stupidsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|solutionrelative:common\\global\\stupidsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|c:\\users\\uhhno\\documents\\my games\\terraria\\tmodloader\\modsources\\stupidmode\\common\\system\\genpasses\\mimicifygenpass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|solutionrelative:common\\system\\genpasses\\mimicifygenpass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|c:\\users\\uhhno\\documents\\my games\\terraria\\tmodloader\\modsources\\stupidmode\\common\\system\\keybindsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|solutionrelative:common\\system\\keybindsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|c:\\users\\uhhno\\documents\\my games\\terraria\\tmodloader\\modsources\\stupidmode\\common\\system\\worldsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|solutionrelative:common\\system\\worldsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|c:\\users\\uhhno\\documents\\my games\\terraria\\tmodloader\\modsources\\stupidmode\\localization\\en-us_mods.stupidmode.hjson||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|solutionrelative:localization\\en-us_mods.stupidmode.hjson||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|c:\\users\\uhhno\\documents\\my games\\terraria\\tmodloader\\modsources\\stupidmode\\stupidmode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D999D6BE-444B-46C4-A7CB-C186B43BEF41}|StupidMode.csproj|solutionrelative:stupidmode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AttackOfTheKillerQueenMeowsynth.cs",
+              "DocumentMoniker": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\Common\\SceneEffects\\Music\\AttackOfTheKillerQueenMeowsynth.cs",
+              "RelativeDocumentMoniker": "Common\\SceneEffects\\Music\\AttackOfTheKillerQueenMeowsynth.cs",
+              "ToolTip": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\Common\\SceneEffects\\Music\\AttackOfTheKillerQueenMeowsynth.cs",
+              "RelativeToolTip": "Common\\SceneEffects\\Music\\AttackOfTheKillerQueenMeowsynth.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAA+AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T20:31:48.094Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BrokenVessel.cs",
+              "DocumentMoniker": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\Common\\SceneEffects\\Music\\BrokenVessel.cs",
+              "RelativeDocumentMoniker": "Common\\SceneEffects\\Music\\BrokenVessel.cs",
+              "ToolTip": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\Common\\SceneEffects\\Music\\BrokenVessel.cs",
+              "RelativeToolTip": "Common\\SceneEffects\\Music\\BrokenVessel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAQAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T20:31:06.42Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MimicifyGenpass.cs",
+              "DocumentMoniker": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\Common\\System\\Genpasses\\MimicifyGenpass.cs",
+              "RelativeDocumentMoniker": "Common\\System\\Genpasses\\MimicifyGenpass.cs",
+              "ToolTip": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\Common\\System\\Genpasses\\MimicifyGenpass.cs",
+              "RelativeToolTip": "Common\\System\\Genpasses\\MimicifyGenpass.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T20:31:01.804Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "KeybindSystem.cs",
+              "DocumentMoniker": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\Common\\System\\KeybindSystem.cs",
+              "RelativeDocumentMoniker": "Common\\System\\KeybindSystem.cs",
+              "ToolTip": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\Common\\System\\KeybindSystem.cs",
+              "RelativeToolTip": "Common\\System\\KeybindSystem.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T20:30:58.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "WorldSystem.cs",
+              "DocumentMoniker": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\Common\\System\\WorldSystem.cs",
+              "RelativeDocumentMoniker": "Common\\System\\WorldSystem.cs",
+              "ToolTip": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\Common\\System\\WorldSystem.cs",
+              "RelativeToolTip": "Common\\System\\WorldSystem.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T20:30:57.278Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "StupidSystem.cs",
+              "DocumentMoniker": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\Common\\Global\\StupidSystem.cs",
+              "RelativeDocumentMoniker": "Common\\Global\\StupidSystem.cs",
+              "ToolTip": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\Common\\Global\\StupidSystem.cs",
+              "RelativeToolTip": "Common\\Global\\StupidSystem.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T20:30:50.985Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "en-US_Mods.StupidMode.hjson",
+              "DocumentMoniker": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\Localization\\en-US_Mods.StupidMode.hjson",
+              "RelativeDocumentMoniker": "Localization\\en-US_Mods.StupidMode.hjson",
+              "ToolTip": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\Localization\\en-US_Mods.StupidMode.hjson",
+              "RelativeToolTip": "Localization\\en-US_Mods.StupidMode.hjson",
+              "ViewState": "AQIAAJAAAAAAAAAAAAAAAKkAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-06-06T20:29:48.204Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "StupidNPC.cs",
+              "DocumentMoniker": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\Common\\Global\\StupidNPC.cs",
+              "RelativeDocumentMoniker": "Common\\Global\\StupidNPC.cs",
+              "ToolTip": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\Common\\Global\\StupidNPC.cs",
+              "RelativeToolTip": "Common\\Global\\StupidNPC.cs",
+              "ViewState": "AQIAALUDAAAAAAAAAAArwNQDAABbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T20:27:58.946Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "StupidMode.cs",
+              "DocumentMoniker": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\StupidMode.cs",
+              "RelativeDocumentMoniker": "StupidMode.cs",
+              "ToolTip": "C:\\Users\\uhhno\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\StupidMode\\StupidMode.cs",
+              "RelativeToolTip": "StupidMode.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T20:27:33.093Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

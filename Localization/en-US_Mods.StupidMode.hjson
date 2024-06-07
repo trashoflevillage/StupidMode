@@ -21,6 +21,7 @@ Projectiles: {
 	Bloodbeam.DisplayName: Bloodbeam
 	FriendlyCursedSkull.DisplayName: Friendly Cursed Skull
 	ZombieHead.DisplayName: Zombie Head
+	Meowstrike.DisplayName: Meowstrike
 }
 
 Items: {
@@ -167,5 +168,3 @@ DropConditions: {
 	IsNotChild: Mods.StupidMode.DropConditions.IsNotChild
 	IsNotMimicTrap: Mods.StupidMode.DropConditions.IsNotMimicTrap
 }
-
-Notifications.Meowstrike: A meowstrike is incoming!

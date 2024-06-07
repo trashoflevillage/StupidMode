@@ -111,7 +111,7 @@ namespace StupidMode.Common.Global
                 NewCooldown(npc, NPCID.Spazmatism, "bouncyBoulderThrowActivate", 340, false);
                 NewCooldown(npc, NPCID.Spazmatism, "bouncyBoulderThrow", 180, false, -1);
 
-                //NewCooldown(npc, NPCID.QueenSlimeBoss, "meowStrike", 3600, true, 1800);
+                NewCooldown(npc, NPCID.QueenSlimeBoss, "meowStrike", 3600, true, 1800);
 
                 NewCooldown(npc, NPCID.Retinazer, "laserRingActivate", 340);
                 NewCooldown(npc, NPCID.Retinazer, "laserRing", 180, true, -1);
@@ -654,15 +654,17 @@ namespace StupidMode.Common.Global
                 }
             }*/
 
-            /*if (cooldowns.ContainsKey("meowStrike"))
+            if (cooldowns.ContainsKey("meowStrike"))
             {
                 if (cooldowns["meowStrike"].TickCooldown())
                 {
-                    ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.StupidMode.Notifications.Meowstrike"), new Color(50, 255, 130));
-                    SoundEngine.PlaySound(SoundID.Meowmere);
+                    SoundEngine.PlaySound(SoundID.Roar, npc.position);
+                    SummonEnemySwarm(npc.GetSource_FromAI(), NPCID.QueenSlimeMinionBlue, 10, npc.position);
+                    SummonEnemySwarm(npc.GetSource_FromAI(), NPCID.QueenSlimeMinionPink, 10, npc.position);
+                    SummonEnemySwarm(npc.GetSource_FromAI(), NPCID.QueenSlimeMinionPurple, 10, npc.position);
                     cooldowns["meowStrike"].val = -1;
                 }
-            }*/
+            }
         }
         
         /// <summary>
@@ -976,6 +978,8 @@ namespace StupidMode.Common.Global
 
                 case NPCID.Deerclops: return BossMusic.WinterEFS;
 
+                case NPCID.QueenSlimeBoss: return BossMusic.AttackOfTheKillerQueenMeowsynth;
+
                 default: return BossMusic.None;
             }
         }
@@ -994,6 +998,7 @@ namespace StupidMode.Common.Global
                 case BossMusic.DSTBeeQueen: songName = "Bee Queen's Theme"; author = "Klei Entertainment"; source = "Don't Starve Together"; break;
                 case BossMusic.WinterEFS: songName = "EFS of Winter"; author = "Klei Entertainment"; source = "Don't Starve"; break;
                 case BossMusic.BrokenVessel: songName = "Broken Vessel"; author = "Christopher Larkin"; source = "Hollow Knight"; break;
+                case BossMusic.AttackOfTheKillerQueenMeowsynth: songName = "(MeowSynth) Attack Of The Killer Queen"; author = "Gerlumb"; source = "Deltarune"; break;
             }
 
             ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("Now Playing: " + songName + " by " + author + " from " + source + "."), new Color(25, 217, 234));
@@ -1006,6 +1011,7 @@ namespace StupidMode.Common.Global
         ChaosKing = 1,
         DSTBeeQueen = 2,
         WinterEFS = 3,
-        BrokenVessel = 4
+        BrokenVessel = 4,
+        AttackOfTheKillerQueenMeowsynth = 5
     }
 }

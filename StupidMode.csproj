@@ -15,6 +15,7 @@
     <None Remove="Content\NPCs\Town\Niko_Shimmer.png" />
     <None Remove="Content\NPCs\Town\Niko_Shimmer_Head.png" />
     <None Remove="Content\NPCs\Town\Niko_Shimmer_Party.png" />
+    <None Remove="Content\Projectiles\Meowstrike.png" />
     <None Remove="Content\Projectiles\ZombieHead.png" />
   </ItemGroup>
   <ItemGroup>
